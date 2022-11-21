@@ -1,4 +1,4 @@
-package com.example.mycalendar.ui.notifications;
+package com.example.mycalendar.ui.Contact;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

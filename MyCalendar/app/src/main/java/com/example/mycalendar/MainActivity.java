@@ -2,6 +2,7 @@ package com.example.mycalendar;
 
 import android.os.Bundle;
 
+import com.example.mycalendar.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +11,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mycalendar.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,5 +31,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }

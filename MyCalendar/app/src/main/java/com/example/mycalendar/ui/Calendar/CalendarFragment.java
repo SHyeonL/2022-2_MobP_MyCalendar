@@ -1,8 +1,6 @@
-package com.example.mycalendar.ui.dashboard;
+package com.example.mycalendar.ui.Calendar;
 
-import static android.os.Build.VERSION_CODES.R;
-
-import android.graphics.Path;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,26 +10,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
-import com.example.mycalendar.databinding.FragmentDashboardBinding;
+import com.example.mycalendar.MainActivity;
+import com.example.mycalendar.databinding.FragmentCalendarBinding;
 
-public class DashboardFragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentCalendarBinding binding;
+    MainActivity mainActivity = new MainActivity();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentCalendarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        binding.button.setOnClickListener(View.OnClickListener {
-            Navigation.findNavController(this).navigate();
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddScheduleActivity.class);
+                startActivity(intent);
+            }
         });
         return root;
     }
