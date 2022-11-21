@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/image_search_icon"
+        android:title="검색하기"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_add"
+        android:title="추가하기"
+        app:showAsAction="always"
+        android:icon="@drawable/image_add_icon"/>
+</menu>
