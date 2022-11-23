@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_calendar"
         android:name="com.example.mycalendar.ui.Calendar.CalendarFragment"
-        android:label="@string/title_dashboard"
+        android:label="Calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_contact"
         android:name="com.example.mycalendar.ui.Contact.ContactFragment"
-        android:label="@string/title_notifications"
+        android:label="Contact"
         tools:layout="@layout/fragment_contact" />
 </navigation>

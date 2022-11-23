@@ -20,7 +20,7 @@ import com.example.mycalendar.databinding.FragmentHomeBinding;
 import com.example.mycalendar.ui.Calendar.AddScheduleActivity;
 import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.Calendar.toDoListView;
-import com.example.mycalendar.ui.Contact.AddContactActivity;
+import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -44,20 +44,6 @@ public class HomeFragment extends Fragment {
 
         binding.todoList.setAdapter(adapter);
 
-//        Button button = (Button) findViewById(R.id.button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String name = editText.getText().toString();
-//                String mobile = "010-1000-1000";
-//                int age = 20;
-//
-//                adapter.addItem(new SingerItem(name, mobile, age, R.drawable.singer3));
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-
-
         binding.todoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -66,6 +52,12 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     class toDoListAdapter extends BaseAdapter {
@@ -103,31 +95,31 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
-    @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.common_action_bar, menu);
     }
 
     @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_search :
-                Intent intent = new Intent(getActivity(), AddContactActivity.class);
-                startActivity(intent);
+            case R.id.action_search:
+                StartSearchActivity();
                 break;
-
-                case R.id.action_add:
-                    Intent intent1 = new Intent(getActivity(), AddScheduleActivity.class);
-                    startActivity(intent1);
-            default:
+            case R.id.action_add:
+                StartAddScheduleActivity();
                 break;
         }
-        return super.onContextItemSelected(item);
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void StartAddScheduleActivity() {
+        Intent intent = new Intent(getActivity(), AddScheduleActivity.class);
+        startActivity(intent);
+    }
+
+    public void StartSearchActivity() {
+        Intent intent = new Intent(getActivity(), SearchActivity.class);
+        startActivity(intent);
     }
 }

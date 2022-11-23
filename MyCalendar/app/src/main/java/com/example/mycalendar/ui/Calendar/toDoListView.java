@@ -26,8 +26,8 @@ public class toDoListView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.todo_list, this, true);
 
-        textTitle = (TextView) findViewById(R.id.textTitle);
-        textDate = (TextView) findViewById(R.id.textDate);
+        textTitle = (TextView) findViewById(R.id.textName);
+        textDate = (TextView) findViewById(R.id.textPhoneNum);
     }
 
     public void setTitle(String title) {
