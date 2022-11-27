@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentContactBinding;
-import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
@@ -46,7 +45,10 @@ public class ContactFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 ContactItem item = (ContactItem) adapter.getItem(position);
-                Toast.makeText(getActivity().getApplicationContext(), "선택 : " + item.getName(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), DetailContactViewActivity.class);
+                intent.putExtra("name", item.getName());
+                intent.putExtra("number", item.getPhoneNum());
+                startActivity(intent);
             }
         });
         return root;
