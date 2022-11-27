@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Calendar.CalendarFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView_month"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:background="#ffe95451"
-        android:gravity="center"
-        android:text="Month"
+        android:layout_height="100dp"
         android:textAlignment="center"
+        android:background="#ffe95451"
         android:textColor="#fff"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:gravity="center"
+        android:text="Month" />
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,4 +34,31 @@
         app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
         app:compactCalendarMultiEventIndicatorColor="#fff"
         />
+
+    <TextView
+        android:id="@+id/textView_result"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:background="#ffe95451"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:text="클릭한 날짜 정보" />
+    <Button
+        android:id="@+id/button_add_events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이벤트 추가" />
+    <Button
+        android:id="@+id/button_remove_events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이벤트 제거" />
+
+    <Button
+        android:id="@+id/button_get_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이벤트 정보 가져오기" />
+
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.mycalendar.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.mycalendar.MainActivity;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentHomeBinding;
 import com.example.mycalendar.ui.Calendar.AddScheduleActivity;
@@ -37,7 +41,7 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         adapter = new toDoListAdapter();
 
-        adapter.addItem(new toDoItem("할일1", "2022-01-01"));
+        adapter.addItem(new toDoItem("Study", "2022-01-01"));
         adapter.addItem(new toDoItem("할일2", "2022-01-02"));
         adapter.addItem(new toDoItem("할일3", "2022-01-03"));
         adapter.addItem(new toDoItem("할일4", "2022-01-04"));
@@ -104,7 +108,31 @@ public class HomeFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                StartSearchActivity();
+                final EditText editText = new EditText(getContext());
+                AlertDialog.Builder menu = new AlertDialog.Builder(getActivity());
+                menu.setIcon(R.mipmap.ic_launcher);
+                menu.setTitle("일정 검색"); // 제목
+                menu.setView(editText);
+
+
+                // 확인 버튼
+                menu.setPositiveButton("검색", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dialog 제거
+                        dialog.dismiss();
+                    }
+                });
+
+                // 취소 버튼
+                menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dialog 제거
+                        dialog.dismiss();
+                    }
+                });
+                menu.show();
                 break;
             case R.id.action_add:
                 StartAddScheduleActivity();
