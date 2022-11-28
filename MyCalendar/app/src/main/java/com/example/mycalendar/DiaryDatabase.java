@@ -80,7 +80,7 @@ public class DiaryDatabase {
      * execute raw query using the input SQL
      * close the cursor after fetching any result
      */
-    public Cursor rawQuery(String SQL) {
+    public Cursor rawQuery(String SQL, Object o) {
         println("\nexecuteQuery called.\n");
 
         Cursor c1 = null;
@@ -138,7 +138,6 @@ public class DiaryDatabase {
             // create table
             String CREATE_SQL = "create table " + TABLE_DIARY_INFO + "("
                     + "  _id INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT, "
-                    //+ "  NAME TEXT, "
                     + "  CREATE_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
                     + "  SUBJECT TEXT, "
                     + "  CONTENTS TEXT "
