@@ -33,7 +33,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         binding = ActivityAddScheduleBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         dataBase.openDatabase(this, DATABASE_NAME);
-        dataBase.createTable(TABLE_DIARY_INFO);
+        dataBase.createDiaryTable(TABLE_DIARY_INFO);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -66,7 +66,7 @@ public class AddScheduleActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "날짜를 선택해주세요", Toast.LENGTH_LONG);
                     toast.show();
                 } else {
-                    dataBase.insertScheduleRecord(TABLE_DIARY_INFO, date, title, content);
+                    dataBase.insertDiaryRecord(TABLE_DIARY_INFO, date, title, content);
                 }
             }
         });

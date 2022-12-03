@@ -135,7 +135,7 @@ public class HomeFragment extends Fragment {
                 menu.show();
                 break;
             case R.id.action_add:
-                StartSearchActivity();
+                StartAddScheduleActivity();
                 break;
         }
         return super.onOptionsItemSelected(item);

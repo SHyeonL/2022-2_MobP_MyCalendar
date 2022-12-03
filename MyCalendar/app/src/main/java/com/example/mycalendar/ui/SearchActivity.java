@@ -20,7 +20,7 @@ public class SearchActivity extends AppCompatActivity {
         binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_search);
         dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
-        dataBase.createTable(TABLE_CONTACT_INFO);
+        dataBase.createContactTable(TABLE_CONTACT_INFO);
         dataBase.insertContactRecord(TABLE_CONTACT_INFO);//테이블 이름설정
         dataBase.selectData(TABLE_CONTACT_INFO); //테이블설정
     }

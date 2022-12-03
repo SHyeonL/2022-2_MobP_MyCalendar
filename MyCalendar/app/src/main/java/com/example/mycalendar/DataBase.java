@@ -21,8 +21,10 @@ public class DataBase {
         return count;
     }
 
-    public void insertScheduleRecord(String name, String date, String title, String content) {
-        database.execSQL("insert into " + name + "(create_date, subject, contents) values (date, title, content);");
+    public void insertDiaryRecord(String name, String date, String title, String content) {
+        //database.execSQL("insert into " + name + "(create_date, subject, contents) values (date, title, content);");
+        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENTS) values ('" + date + "', '" + title + "', '" + content + "');" );
+
     }
 
     public void openDatabase(Context context, String DATABASE_NAME) {
@@ -33,9 +35,19 @@ public class DataBase {
         }
     }
 
-    public void createTable(String name) {
+    public void createContactTable(String name) {
         if (database != null) {
             String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, name text, mobile text)";
+            database.execSQL(sql);
+            Log.d("open", "테이블 오픈");
+        } else {
+            Log.d("테스트", "테이블 오픈되지 않음");
+        }
+    }
+
+    public void createDiaryTable(String name) {
+        if (database != null) {
+            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, CREATE_DATE text, subject text, content text)";
             database.execSQL(sql);
             Log.d("open", "테이블 오픈");
         } else {
