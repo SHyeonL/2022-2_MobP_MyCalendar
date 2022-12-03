@@ -1,9 +1,16 @@
 package com.example.mycalendar.ui.home;
 
+import static com.example.mycalendar.DataBase.DATABASE_NAME;
+import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
+import static com.example.mycalendar.DataBase.TABLE_DIARY_INFO;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.mycalendar.DataBase;
 import com.example.mycalendar.MainActivity;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentHomeBinding;
@@ -31,14 +39,19 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    DataBase dataBase = new DataBase();
+    SQLiteDatabase db;
+    public toDoListAdapter adapter;
 
-    toDoListAdapter adapter;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         setHasOptionsMenu(true);
         View root = binding.getRoot();
+        dataBase.openDatabase(container.getContext(), DATABASE_NAME);
+        dataBase.createDiaryTable(TABLE_DIARY_INFO);
         adapter = new toDoListAdapter();
 
         adapter.addItem(new toDoItem("Study", "2022-01-01"));
@@ -55,7 +68,35 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "선택 : " + item.getTitle(), Toast.LENGTH_LONG).show();
             }
         });
+        selectData(TABLE_CONTACT_INFO);
         return root;
+    }
+
+    // TODO: 2022/12/04
+    public void selectData(String TABLE_CONTACT_INFO) {
+        if (db != null) {
+            String sql = "select name, number from " + TABLE_CONTACT_INFO;
+            Cursor cursor = db.rawQuery(sql, null);
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToNext();//다음 레코드로 넘어간다.
+                String name = cursor.getString(0);
+                String number = cursor.getString(1);
+                adapter.addItem(new toDoItem(name, number));
+                Log.d("데이터 name", name);
+                Log.d("데이터 number", number);
+                Log.d("open", "데이터 오픈");
+            }
+            cursor.close();
+        }
+        if (dataBase == null) {
+            Log.d("테스트", "db 비어 있음");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        selectData(TABLE_CONTACT_INFO);
     }
 
     @Override

@@ -19,9 +19,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_search);
-        dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
-        dataBase.createContactTable(TABLE_CONTACT_INFO);
-        dataBase.insertContactRecord(TABLE_CONTACT_INFO);//테이블 이름설정
-        dataBase.selectData(TABLE_CONTACT_INFO); //테이블설정
+//        dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
+//        dataBase.createContactTable(TABLE_CONTACT_INFO);
+//        dataBase.insertContactRecord(TABLE_CONTACT_INFO);//테이블 이름설정
+//        dataBase.selectData(TABLE_CONTACT_INFO); //테이블설정
     }
 }

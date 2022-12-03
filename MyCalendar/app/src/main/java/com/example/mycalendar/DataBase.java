@@ -5,26 +5,22 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mycalendar.ui.home.HomeFragment;
+
 public class DataBase {
     public static String DATABASE_NAME = "diary.db";
     public static String TABLE_DIARY_INFO = "DIARY_INFO";
     public static String TABLE_CONTACT_INFO = "CONTACT_INFO";
 
+    HomeFragment homeFragment;
     SQLiteDatabase database;
 
-    public int insertContactRecord(String name) {
-        int count = 3;
-        database.execSQL("insert into " + name + "(name, number) values ('John', '010-7788-1234');");
-        database.execSQL("insert into " + name + "(name, number) values ('Mike', '010-8888-1111');");
-        database.execSQL("insert into " + name + "(name, number) values ('Sean', '010-6677-4321');");
-
-        return count;
+    public void insertContactRecord(String name, String number) {
+        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(name, number) values ('" + name + "', '" + number + "');");
     }
 
     public void insertDiaryRecord(String name, String date, String title, String content) {
-        //database.execSQL("insert into " + name + "(create_date, subject, contents) values (date, title, content);");
-        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENTS) values ('" + date + "', '" + title + "', '" + content + "');" );
-
+        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENTS) values ('" + date + "', '" + title + "', '" + content + "');");
     }
 
     public void openDatabase(Context context, String DATABASE_NAME) {
@@ -53,6 +49,10 @@ public class DataBase {
         } else {
             Log.d("테스트", "테이블 오픈되지 않음");
         }
+    }
+
+    public void DeleteDiaryRecord() {
+
     }
 
     public void selectData(String TABLE_CONTACT_INFO) {
