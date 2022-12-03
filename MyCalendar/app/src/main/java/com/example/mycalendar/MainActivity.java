@@ -15,28 +15,9 @@ import android.util.Log;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
-    DiaryDatabase database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // open database
-        if (database != null) {
-            database.close();
-            database = null;
-        }
-
-        database = DiaryDatabase.getInstance(this);
-        boolean isOpen = database.open();
-        if (isOpen) {
-            Log.d(TAG, "diary database is open.");
-        } else {
-            Log.d(TAG, "diary database is not open.");
-        }
-        //
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -48,15 +29,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
-    //
-    protected void onDestroy() {
-        // close database
-        if (database != null) {
-            database.close();
-            database = null;
-        }
-        super.onDestroy();
-    }
-    //
 }

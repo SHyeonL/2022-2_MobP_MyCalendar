@@ -6,9 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class DataBase {
+    public static String DATABASE_NAME = "diary.db";
+    public static String TABLE_DIARY_INFO = "DIARY_INFO";
+    public static String TABLE_CONTACT_INFO = "CONTACT_INFO";
+
     SQLiteDatabase database;
 
-    public int insertRecord(String name) {
+    public int insertContactRecord(String name) {
         int count = 3;
         database.execSQL("insert into " + name + "(name, number) values ('John', '010-7788-1234');");
         database.execSQL("insert into " + name + "(name, number) values ('Mike', '010-8888-1111');");
@@ -17,12 +21,15 @@ public class DataBase {
         return count;
     }
 
+    public void insertScheduleRecord(String name, String date, String title, String content) {
+        database.execSQL("insert into " + name + "(create_date, subject, contents) values (date, title, content);");
+    }
+
     public void openDatabase(Context context, String DATABASE_NAME) {
         database = context.openOrCreateDatabase(DATABASE_NAME, context.MODE_PRIVATE, null); //보안때문에 요즘은 대부분 PRIVATE 사용,
-        Log.d("open", "데이터베이스 오픈");
         // SQLiteDatabase 객체가 반환됨
         if (database != null) {
-            Log.d("open", "데이터베이스 존재하지 않음");
+            Log.d("open", "데이터베이스 오픈");
         }
     }
 
@@ -37,7 +44,6 @@ public class DataBase {
     }
 
     public void selectData(String TABLE_CONTACT_INFO) {
-        Log.d("open", "데이터 오픈되지는 않음");
         if (database != null) {
             String sql = "select name, number from " + TABLE_CONTACT_INFO;
             Cursor cursor = database.rawQuery(sql, null);

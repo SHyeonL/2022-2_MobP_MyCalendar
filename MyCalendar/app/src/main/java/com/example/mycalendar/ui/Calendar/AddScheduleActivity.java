@@ -1,67 +1,74 @@
 package com.example.mycalendar.ui.Calendar;
 //
-import static android.content.ContentValues.TAG;
-import static com.example.mycalendar.DiaryDatabase.database;
 //
+import static com.example.mycalendar.DataBase.DATABASE_NAME;
+import static com.example.mycalendar.DataBase.TABLE_DIARY_INFO;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
-import com.example.mycalendar.DiaryDatabase;
-import com.example.mycalendar.R;
+import com.example.mycalendar.DataBase;
+import com.example.mycalendar.databinding.ActivityAddScheduleBinding;
+
+import java.util.Calendar;
 
 public class AddScheduleActivity extends AppCompatActivity {
 
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR);
+    int month = calendar.get(Calendar.MONTH);
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-    DiaryDatabase database;
-    EditText editText;//일정 제목
-    EditText editText3;//일정 내용
+    DataBase dataBase = new DataBase();
+    private ActivityAddScheduleBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_schedule);
-        //
-        editText = findViewById(R.id.editText);
-        editText3 = findViewById(R.id.editText3);
-        // open database
-        if (database != null) {
-            database.close();
-            database = null;
-        }
+        binding = ActivityAddScheduleBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        dataBase.openDatabase(this, DATABASE_NAME);
+        dataBase.createTable(TABLE_DIARY_INFO);
 
-        database = DiaryDatabase.getInstance(this);
-        boolean isOpen = database.open();
-        if (isOpen) {
-            Log.d(TAG, "diary database is open.");
-        } else {
-            Log.d(TAG, "diary database is not open.");
-        }
-
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onClick(View v) {
-                String subject = editText.getText().toString();
-                String contents = editText3.getText().toString();
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                binding.btnDate.setText(dayOfMonth + "/" + (month+1) + "/" + year);
+            }
+        }, year, month, day);
 
-                database.insertRecord( subject, contents);
-                Toast.makeText(getApplicationContext(), "정보를 추가했습니다.", Toast.LENGTH_LONG).show();
+        binding.btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
             }
         });
-    }
 
-    protected void onDestroy() {
-        // close database
-        if (database != null) {
-            database.close();
-            database = null;
-        }
-        super.onDestroy();
+        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = binding.editTitle.getText().toString();
+                String content = binding.editContent.getText().toString();
+                String date = binding.btnDate.getText().toString();
+
+                if(title.equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "제목을 입력해주세요", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if(content.equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "내용을 입력해주세요", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if(date.equals("날짜 선택")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "날짜를 선택해주세요", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    dataBase.insertScheduleRecord(TABLE_DIARY_INFO, date, title, content);
+                }
+            }
+        });
     }
 }
