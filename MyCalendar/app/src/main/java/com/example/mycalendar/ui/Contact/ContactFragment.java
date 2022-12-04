@@ -33,6 +33,7 @@ public class ContactFragment extends Fragment {
     private FragmentContactBinding binding;
     ContactListAdapter adapter;
 
+    ArrayList arrayList = new ArrayList<String>();
     DataBase dataBase = new DataBase();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,8 +57,13 @@ public class ContactFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        return root;
+    }
 
-        ArrayList arrayList = new ArrayList<String>();
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.clearItems();
         arrayList = dataBase.getContactInfo();
         for (int i = 0; i < arrayList.toArray().length; i += 3) {
             Log.d("데이터베이스 값", arrayList.get(i).toString());
@@ -67,7 +73,6 @@ public class ContactFragment extends Fragment {
             adapter.addItem(new ContactItem(id, name, number));
         }
         binding.contactList.setAdapter(adapter);
-        return root;
     }
 
     @Override
@@ -87,6 +92,8 @@ public class ContactFragment extends Fragment {
         public void addItem(ContactItem item) {
             items.add(item);
         }
+
+        public void clearItems() { items.clear(); }
 
         @Override
         public Object getItem(int position) {

@@ -41,6 +41,7 @@ public class AddContactActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     database.insertContactRecord(name, number);
+                    onBackPressed();
                 }
             }
         });

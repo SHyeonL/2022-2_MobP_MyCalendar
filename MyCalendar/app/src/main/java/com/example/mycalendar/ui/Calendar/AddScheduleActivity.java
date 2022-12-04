@@ -83,6 +83,7 @@ public class AddScheduleActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     dataBase.insertDiaryRecord(TABLE_DIARY_INFO, date, title, content);
+                    onBackPressed();
                 }
             }
         });

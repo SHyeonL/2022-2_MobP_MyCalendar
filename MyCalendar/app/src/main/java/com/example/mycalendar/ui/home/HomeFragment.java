@@ -41,6 +41,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
+    ArrayList arrayList = new ArrayList<String>();
     private FragmentHomeBinding binding;
     DataBase dataBase = new DataBase();
     public toDoListAdapter adapter;
@@ -67,8 +68,13 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        return root;
+    }
 
-        ArrayList arrayList = new ArrayList<String>();
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.clearItems();
         arrayList = dataBase.getDiaryInfo();
         for (int i = 0; i < arrayList.toArray().length; i += 4) {
             Log.d("데이터베이스 값", arrayList.get(i).toString());
@@ -79,12 +85,6 @@ public class HomeFragment extends Fragment {
             adapter.addItem(new toDoItem(id, subject, date, contents));
         }
         binding.todoList.setAdapter(adapter);
-        return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -96,6 +96,8 @@ public class HomeFragment extends Fragment {
     class toDoListAdapter extends BaseAdapter {
 
         ArrayList<toDoItem> items = new ArrayList<toDoItem>();
+
+        public void clearItems() { items.clear(); }
 
         @Override
         public int getCount() {
