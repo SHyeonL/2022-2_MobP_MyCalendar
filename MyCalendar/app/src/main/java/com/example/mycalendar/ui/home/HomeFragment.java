@@ -40,9 +40,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     DataBase dataBase = new DataBase();
-    SQLiteDatabase db;
     public toDoListAdapter adapter;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,13 +52,10 @@ public class HomeFragment extends Fragment {
         dataBase.createDiaryTable(TABLE_DIARY_INFO);
         adapter = new toDoListAdapter();
 
-        adapter.addItem(new toDoItem("Study", "2022-01-01"));
-        adapter.addItem(new toDoItem("할일2", "2022-01-02"));
-        adapter.addItem(new toDoItem("할일3", "2022-01-03"));
-        adapter.addItem(new toDoItem("할일4", "2022-01-04"));
-
-        binding.todoList.setAdapter(adapter);
-
+//        adapter.addItem(new toDoItem("Study", "2022-01-01"));
+//        adapter.addItem(new toDoItem("할일2", "2022-01-02"));
+//        adapter.addItem(new toDoItem("할일3", "2022-01-03"));
+//        adapter.addItem(new toDoItem("할일4", "2022-01-04"));
         binding.todoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -68,40 +63,22 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "선택 : " + item.getTitle(), Toast.LENGTH_LONG).show();
             }
         });
-        selectData(TABLE_CONTACT_INFO);
         ArrayList arrayList = new ArrayList<String>();
-        arrayList = dataBase.Test();
-        for(int i = 0; i < arrayList.toArray().length; i++) {
+        arrayList = dataBase.getDiaryInfo();
+        for (int i = 0; i < arrayList.toArray().length; i += 3) {
             Log.d("데이터베이스 값", arrayList.get(i).toString());
+            String date = arrayList.get(i).toString();
+            String subject = arrayList.get(i + 1).toString();
+            String contents = arrayList.get(i + 2).toString();
+            adapter.addItem(new toDoItem(subject, date, contents));
         }
+        binding.todoList.setAdapter(adapter);
         return root;
-    }
-
-    // TODO: 2022/12/04
-    public void selectData(String TABLE_CONTACT_INFO) {
-        if (db != null) {
-            String sql = "select name, number from " + TABLE_CONTACT_INFO;
-            Cursor cursor = db.rawQuery(sql, null);
-            for (int i = 0; i < cursor.getCount(); i++) {
-                cursor.moveToNext();//다음 레코드로 넘어간다.
-                String name = cursor.getString(0);
-                String number = cursor.getString(1);
-                adapter.addItem(new toDoItem(name, number));
-                Log.d("데이터 name", name);
-                Log.d("데이터 number", number);
-                Log.d("open", "데이터 오픈");
-            }
-            cursor.close();
-        }
-        if (dataBase == null) {
-            Log.d("테스트", "db 비어 있음");
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        selectData(TABLE_CONTACT_INFO);
     }
 
     @Override
@@ -140,6 +117,7 @@ public class HomeFragment extends Fragment {
             toDoItem item = items.get(position);
             view.setTitle(item.getTitle());
             view.setDate(item.getDate());
+            view.setContent(item.getContent());
             return view;
         }
     }

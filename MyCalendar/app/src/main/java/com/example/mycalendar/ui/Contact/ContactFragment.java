@@ -1,7 +1,11 @@
 package com.example.mycalendar.ui.Contact;
 
+import static com.example.mycalendar.DataBase.DATABASE_NAME;
+import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,8 +19,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentContactBinding;
+import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
@@ -27,6 +33,8 @@ public class ContactFragment extends Fragment {
     private FragmentContactBinding binding;
     ContactListAdapter adapter;
 
+    DataBase dataBase = new DataBase();
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -35,12 +43,8 @@ public class ContactFragment extends Fragment {
         View root = binding.getRoot();
         adapter = new ContactListAdapter();
 
-        adapter.addItem(new ContactItem("이성현", "010-5595-1170"));
-        adapter.addItem(new ContactItem("일리요스벡", "010-1234-5678"));
-        adapter.addItem(new ContactItem("하성호", "010-1234-5678"));
-
-        binding.contactList.setAdapter(adapter);
-
+        dataBase.openDatabase(container.getContext(), DATABASE_NAME);
+        dataBase.createContactTable(TABLE_CONTACT_INFO);
         binding.contactList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -51,8 +55,19 @@ public class ContactFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        ArrayList arrayList = new ArrayList<String>();
+        arrayList = dataBase.getContactInfo();
+        for (int i = 0; i < arrayList.toArray().length; i += 2) {
+            Log.d("데이터베이스 값", arrayList.get(i).toString());
+            String name = arrayList.get(i).toString();
+            String number = arrayList.get(i + 1).toString();
+            adapter.addItem(new ContactItem(name, number));
+        }
+        binding.contactList.setAdapter(adapter);
         return root;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -67,7 +82,9 @@ public class ContactFragment extends Fragment {
             return items.size();
         }
 
-        public void addItem(ContactItem item) { items.add(item); }
+        public void addItem(ContactItem item) {
+            items.add(item);
+        }
 
         @Override
         public Object getItem(int position) {

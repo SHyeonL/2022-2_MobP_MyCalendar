@@ -1,6 +1,7 @@
 package com.example.mycalendar.ui.Calendar;
 //
 //
+
 import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_DIARY_INFO;
 
@@ -38,7 +39,22 @@ public class AddScheduleActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                binding.btnDate.setText(year + "/" + (month+1) + "/" + dayOfMonth);
+                month = (month + 1);
+                String tempMonth = "0" + month;
+                String tempDay = "0" + dayOfMonth;
+                if (dayOfMonth < 10) {
+                    if (month < 10) {
+                        binding.btnDate.setText(year + "/" + tempMonth + "/" + tempDay);
+                    } else {
+                        binding.btnDate.setText(year + "/" + month + "/" + tempDay);
+                    }
+                } else {
+                    if (month < 10) {
+                        binding.btnDate.setText(year + "/" + tempMonth + "/" + dayOfMonth);
+                    } else {
+                        binding.btnDate.setText(year + "/" + month + "/" + dayOfMonth);
+                    }
+                }
             }
         }, year, month, day);
 
@@ -56,13 +72,13 @@ public class AddScheduleActivity extends AppCompatActivity {
                 String content = binding.editContent.getText().toString();
                 String date = binding.btnDate.getText().toString();
 
-                if(title.equals("")) {
+                if (title.equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "제목을 입력해주세요", Toast.LENGTH_LONG);
                     toast.show();
-                } else if(content.equals("")) {
+                } else if (content.equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "내용을 입력해주세요", Toast.LENGTH_LONG);
                     toast.show();
-                } else if(date.equals("날짜 선택")) {
+                } else if (date.equals("날짜 선택")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "날짜를 선택해주세요", Toast.LENGTH_LONG);
                     toast.show();
                 } else {

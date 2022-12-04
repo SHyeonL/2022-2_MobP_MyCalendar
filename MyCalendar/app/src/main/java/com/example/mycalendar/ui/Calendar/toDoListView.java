@@ -11,6 +11,7 @@ import com.example.mycalendar.R;
 public class toDoListView extends LinearLayout {
     TextView textTitle;
     TextView textDate;
+    TextView textContent;
 
     public toDoListView(Context context) {
         super(context);
@@ -28,6 +29,7 @@ public class toDoListView extends LinearLayout {
 
         textTitle = (TextView) findViewById(R.id.textName);
         textDate = (TextView) findViewById(R.id.textPhoneNum);
+        textContent = (TextView) findViewById(R.id.textContents);
     }
 
     public void setTitle(String title) {
@@ -36,6 +38,10 @@ public class toDoListView extends LinearLayout {
 
     public void setDate(String date) {
         textDate.setText(date);
+    }
+
+    public void setContent(String content) {
+        textContent.setText(content);
     }
 }
 

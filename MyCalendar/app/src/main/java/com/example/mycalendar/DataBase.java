@@ -58,13 +58,28 @@ public class DataBase {
 
     }
 
-    public ArrayList Test() {
+    public ArrayList getDiaryInfo() {
         ArrayList<String> array_list = new ArrayList<String>();
         Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
         res.moveToFirst();
 
         while(res.isAfterLast() == false) {
             array_list.add(res.getString(res.getColumnIndex("CREATE_DATE")));
+            array_list.add(res.getString(res.getColumnIndex("SUBJECT")));
+            array_list.add(res.getString(res.getColumnIndex("CONTENTS")));
+            res.moveToNext();
+        }
+        return array_list;
+    }
+
+    public ArrayList getContactInfo() {
+        ArrayList<String> array_list = new ArrayList<String>();
+        Cursor res = database.rawQuery("select * from " + TABLE_CONTACT_INFO + " ORDER BY NAME", null);
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false) {
+            array_list.add(res.getString(res.getColumnIndex("NAME")));
+            array_list.add(res.getString(res.getColumnIndex("NUMBER")));
             res.moveToNext();
         }
         return array_list;
