@@ -38,7 +38,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                binding.btnDate.setText(dayOfMonth + "/" + (month+1) + "/" + year);
+                binding.btnDate.setText(year + "/" + (month+1) + "/" + dayOfMonth);
             }
         }, year, month, day);
 

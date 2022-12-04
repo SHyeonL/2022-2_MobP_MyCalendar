@@ -7,6 +7,9 @@ import android.util.Log;
 
 import com.example.mycalendar.ui.home.HomeFragment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class DataBase {
     public static String DATABASE_NAME = "diary.db";
     public static String TABLE_DIARY_INFO = "DIARY_INFO";
@@ -53,6 +56,18 @@ public class DataBase {
 
     public void DeleteDiaryRecord() {
 
+    }
+
+    public ArrayList Test() {
+        ArrayList<String> array_list = new ArrayList<String>();
+        Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false) {
+            array_list.add(res.getString(res.getColumnIndex("CREATE_DATE")));
+            res.moveToNext();
+        }
+        return array_list;
     }
 
     public void selectData(String TABLE_CONTACT_INFO) {

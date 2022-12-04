@@ -69,6 +69,11 @@ public class HomeFragment extends Fragment {
             }
         });
         selectData(TABLE_CONTACT_INFO);
+        ArrayList arrayList = new ArrayList<String>();
+        arrayList = dataBase.Test();
+        for(int i = 0; i < arrayList.toArray().length; i++) {
+            Log.d("데이터베이스 값", arrayList.get(i).toString());
+        }
         return root;
     }
 
