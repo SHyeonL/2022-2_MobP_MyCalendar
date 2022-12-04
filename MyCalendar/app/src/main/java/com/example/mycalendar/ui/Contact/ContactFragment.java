@@ -50,6 +50,7 @@ public class ContactFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 ContactItem item = (ContactItem) adapter.getItem(position);
                 Intent intent = new Intent(getActivity(), DetailContactViewActivity.class);
+                intent.putExtra("id", item.getId());
                 intent.putExtra("name", item.getName());
                 intent.putExtra("number", item.getPhoneNum());
                 startActivity(intent);
@@ -58,11 +59,12 @@ public class ContactFragment extends Fragment {
 
         ArrayList arrayList = new ArrayList<String>();
         arrayList = dataBase.getContactInfo();
-        for (int i = 0; i < arrayList.toArray().length; i += 2) {
+        for (int i = 0; i < arrayList.toArray().length; i += 3) {
             Log.d("데이터베이스 값", arrayList.get(i).toString());
-            String name = arrayList.get(i).toString();
-            String number = arrayList.get(i + 1).toString();
-            adapter.addItem(new ContactItem(name, number));
+            String id = arrayList.get(i).toString();
+            String name = arrayList.get(i + 1).toString();
+            String number = arrayList.get(i + 2).toString();
+            adapter.addItem(new ContactItem(id, name, number));
         }
         binding.contactList.setAdapter(adapter);
         return root;

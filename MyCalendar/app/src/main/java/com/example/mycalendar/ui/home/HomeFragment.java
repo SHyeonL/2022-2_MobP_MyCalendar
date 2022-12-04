@@ -30,8 +30,11 @@ import com.example.mycalendar.MainActivity;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentHomeBinding;
 import com.example.mycalendar.ui.Calendar.AddScheduleActivity;
+import com.example.mycalendar.ui.Calendar.DetailCalendarViewActivity;
 import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.Calendar.toDoListView;
+import com.example.mycalendar.ui.Contact.ContactItem;
+import com.example.mycalendar.ui.Contact.DetailContactViewActivity;
 import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
@@ -52,25 +55,28 @@ public class HomeFragment extends Fragment {
         dataBase.createDiaryTable(TABLE_DIARY_INFO);
         adapter = new toDoListAdapter();
 
-//        adapter.addItem(new toDoItem("Study", "2022-01-01"));
-//        adapter.addItem(new toDoItem("할일2", "2022-01-02"));
-//        adapter.addItem(new toDoItem("할일3", "2022-01-03"));
-//        adapter.addItem(new toDoItem("할일4", "2022-01-04"));
         binding.todoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 toDoItem item = (toDoItem) adapter.getItem(position);
-                Toast.makeText(getActivity().getApplicationContext(), "선택 : " + item.getTitle(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), DetailCalendarViewActivity.class);
+                intent.putExtra("id", item.getId());
+                intent.putExtra("subject", item.getTitle());
+                intent.putExtra("content", item.getContent());
+                intent.putExtra("date", item.getDate());
+                startActivity(intent);
             }
         });
+
         ArrayList arrayList = new ArrayList<String>();
         arrayList = dataBase.getDiaryInfo();
-        for (int i = 0; i < arrayList.toArray().length; i += 3) {
+        for (int i = 0; i < arrayList.toArray().length; i += 4) {
             Log.d("데이터베이스 값", arrayList.get(i).toString());
-            String date = arrayList.get(i).toString();
-            String subject = arrayList.get(i + 1).toString();
-            String contents = arrayList.get(i + 2).toString();
-            adapter.addItem(new toDoItem(subject, date, contents));
+            String id = arrayList.get(i).toString();
+            String date = arrayList.get(i + 1).toString();
+            String subject = arrayList.get(i + 2).toString();
+            String contents = arrayList.get(i + 3).toString();
+            adapter.addItem(new toDoItem(id, subject, date, contents));
         }
         binding.todoList.setAdapter(adapter);
         return root;

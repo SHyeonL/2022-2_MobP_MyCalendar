@@ -64,6 +64,7 @@ public class DataBase {
         res.moveToFirst();
 
         while(res.isAfterLast() == false) {
+            array_list.add(res.getString(res.getColumnIndex("_id")));
             array_list.add(res.getString(res.getColumnIndex("CREATE_DATE")));
             array_list.add(res.getString(res.getColumnIndex("SUBJECT")));
             array_list.add(res.getString(res.getColumnIndex("CONTENTS")));
@@ -78,6 +79,7 @@ public class DataBase {
         res.moveToFirst();
 
         while(res.isAfterLast() == false) {
+            array_list.add(res.getString(res.getColumnIndex("_id")));
             array_list.add(res.getString(res.getColumnIndex("NAME")));
             array_list.add(res.getString(res.getColumnIndex("NUMBER")));
             res.moveToNext();

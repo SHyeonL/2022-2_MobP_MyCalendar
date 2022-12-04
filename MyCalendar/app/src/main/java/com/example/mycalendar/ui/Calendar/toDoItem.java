@@ -1,15 +1,18 @@
 package com.example.mycalendar.ui.Calendar;
 
 public class toDoItem {
+    String id;
     String title;
     String date;
     String content;
 
-    public toDoItem(String title, String date, String content) {
+    public toDoItem(String id, String title, String date, String content) {
+        this.id = id;
         this.title = title;
         this.date = date;
         this.content = content;
     }
+    public String getId() { return id; }
 
     public String getTitle() {
         return title;
