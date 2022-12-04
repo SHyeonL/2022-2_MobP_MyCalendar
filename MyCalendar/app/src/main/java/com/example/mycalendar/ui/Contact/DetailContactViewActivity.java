@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.ActivityDetailContactViewBinding;
@@ -26,5 +27,10 @@ public class DetailContactViewActivity extends AppCompatActivity {
 
         binding.textDetailName.setText(name);
         binding.textDetailNumber.setText(number);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 }

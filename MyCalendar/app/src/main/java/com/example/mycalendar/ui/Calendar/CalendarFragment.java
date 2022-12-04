@@ -48,19 +48,10 @@ public class CalendarFragment extends Fragment {
         setHasOptionsMenu(true);
         View root = binding.getRoot();
 
-//        binding.button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), AddScheduleActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
         // 캘린더 코드 시작
         binding.textViewMonth.setText(dateFormatForMonth.format(binding.compactcalendarView.getFirstDayOfCurrentMonth()));
 
-        binding.compactcalendarView.setFirstDayOfWeek(Calendar.MONDAY);
+        binding.compactcalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
 
         binding.buttonAddEvents.setOnClickListener(new Button.OnClickListener() {
             @Override
