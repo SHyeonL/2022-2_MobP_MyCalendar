@@ -1,9 +1,9 @@
 package com.example.mycalendar.ui.Contact;
 
 public class ContactItem {
-    String id;
-    String name;
-    String phoneNum;
+    private String id;
+    private String name;
+    private String phoneNum;
 
     public ContactItem(String id, String name, String phoneNum) {
         this.id = id;

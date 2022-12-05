@@ -1,13 +1,16 @@
 package com.example.mycalendar;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mycalendar.ui.Contact.ContactListView;
+import com.example.mycalendar.ui.Contact.DetailContactViewActivity;
 import com.example.mycalendar.ui.home.HomeFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DataBase {
@@ -58,6 +61,12 @@ public class DataBase {
 
     }
 
+    public boolean deltest(String id) {
+        database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = "+id);
+        return false;
+    }
+
+
     public ArrayList getDiaryInfo() {
         ArrayList<String> array_list = new ArrayList<String>();
         Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
@@ -79,9 +88,9 @@ public class DataBase {
         res.moveToFirst();
 
         while(res.isAfterLast() == false) {
-            array_list.add(res.getString(res.getColumnIndex("_id")));
-            array_list.add(res.getString(res.getColumnIndex("NAME")));
-            array_list.add(res.getString(res.getColumnIndex("NUMBER")));
+            array_list.add(res.getString(0));
+            array_list.add(res.getString(1));
+            array_list.add(res.getString(2));
             res.moveToNext();
         }
         return array_list;
@@ -105,4 +114,5 @@ public class DataBase {
             Log.d("테스트", "db 비어 있음");
         }
     }
+
 }
