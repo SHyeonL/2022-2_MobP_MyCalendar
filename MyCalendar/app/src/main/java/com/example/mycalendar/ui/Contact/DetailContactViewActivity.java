@@ -28,11 +28,7 @@ public class DetailContactViewActivity extends AppCompatActivity {
     Intent intent;
     private ActivityDetailContactViewBinding binding;
 
-
-
     DataBase dataBase = new DataBase();
-
-
     private SQLiteDatabase database2; //안쓰이고 있음
 
     @Override
@@ -44,12 +40,6 @@ public class DetailContactViewActivity extends AppCompatActivity {
         String id = intent.getStringExtra("id");
         Log.d("db_id", id);
         String name = intent.getStringExtra("name");
-
-        System.out.println("onCreate의 id : "+id);
-        System.out.println("onCreate의 name : "+name);
-
-
-        Log.d("db_name", name);
         String number = intent.getStringExtra("number");
 
         binding.textDetailName.setText(name);
@@ -88,12 +78,8 @@ public class DetailContactViewActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-                        // 삭제는 되지만, 페이지 넘김이 안됨
-                         dataBase.deltest(intent.getStringExtra("id"));
+                         dataBase.deleteContactById(intent.getStringExtra("id"));
                          onBackPressed();
-                        //database2.execSQL("DELETE FROM CONTACT_INFO WHERE _id ="+intent.getStringExtra("id"));
-
                     }
                 });
                 menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {

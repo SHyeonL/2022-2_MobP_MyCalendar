@@ -60,12 +60,17 @@ public class DataBase {
     public void DeleteDiaryRecord() {
 
     }
-
-    public boolean deltest(String id) {
+/////////////////
+    public boolean deleteContactById(String id) {
         database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = "+id);
         return false;
     }
 
+    public boolean deleteDiaryById(String id) {
+        database.execSQL("DELETE FROM DIARY_INFO WHERE _id = "+id);
+        return false;
+    }
+//////////
 
     public ArrayList getDiaryInfo() {
         ArrayList<String> array_list = new ArrayList<String>();

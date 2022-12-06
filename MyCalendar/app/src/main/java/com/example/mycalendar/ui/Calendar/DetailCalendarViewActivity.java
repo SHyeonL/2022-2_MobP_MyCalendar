@@ -1,5 +1,8 @@
 package com.example.mycalendar.ui.Calendar;
 
+import static com.example.mycalendar.DataBase.DATABASE_NAME;
+import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.ActivityDetailCalendarViewBinding;
 
@@ -19,6 +23,9 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
 
     Intent intent;
     private ActivityDetailCalendarViewBinding binding;
+
+
+    DataBase dataBase = new DataBase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,12 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
         binding.textDetailSubject.setText(subject);
         binding.textDetailContents.setText(content);
         binding.textDetailDate.setText(date);
+
+
+        dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
+        dataBase.createContactTable(TABLE_CONTACT_INFO);
+        dataBase.selectData(TABLE_CONTACT_INFO); //테이블설정
+
     }
 
     @Override
@@ -55,7 +68,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
                 menu.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
+                        dataBase.deleteDiaryById(intent.getStringExtra("id"));
                         onBackPressed();
                     }
                 });
