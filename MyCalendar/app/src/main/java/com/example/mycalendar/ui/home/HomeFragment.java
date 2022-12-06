@@ -37,11 +37,13 @@ import com.example.mycalendar.ui.Contact.ContactItem;
 import com.example.mycalendar.ui.Contact.DetailContactViewActivity;
 import com.example.mycalendar.ui.SearchActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     ArrayList arrayList = new ArrayList<String>();
+    ArrayList<ContactItem> contactInfo;
     private FragmentHomeBinding binding;
     DataBase dataBase = new DataBase();
     public toDoListAdapter adapter;
@@ -130,6 +132,8 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -152,6 +156,21 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // dialog 제거
+                        //startSearch();
+                        String test = editText.getText().toString();
+                        adapter.clearItems();
+                        contactInfo = dataBase.searchConteactRecord(test);
+                        for (int i = 0; i < contactInfo.toArray().length; i += 4) {
+                            Log.d("데이터베이스 값", contactInfo.get(i).toString());
+
+                            ContactItem vo = contactInfo.get(i);
+                            String id = vo.getId();
+                            String name = vo.getName();
+                            String number = vo.getPhoneNum();
+                            String contents = contactInfo.get(i + 3).toString();
+                            //adapter.addItem(new toDoItem(id, date, contents));
+                        }
+                        binding.todoList.setAdapter(adapter);
                         dialog.dismiss();
                     }
                 });

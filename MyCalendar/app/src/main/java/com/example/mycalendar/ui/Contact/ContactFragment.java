@@ -3,6 +3,8 @@ package com.example.mycalendar.ui.Contact;
 import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +35,7 @@ public class ContactFragment extends Fragment {
 
     private FragmentContactBinding binding;
     ContactListAdapter adapter;
+    ArrayList<ContactItem> contactInfo;
 
     ArrayList arrayList = new ArrayList<String>();
     DataBase dataBase = new DataBase();
@@ -126,7 +130,40 @@ public class ContactFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                StartSearchActivity();
+                final EditText editText = new EditText(getContext());
+                AlertDialog.Builder menu = new AlertDialog.Builder(getActivity());
+                menu.setIcon(R.mipmap.ic_launcher);
+                menu.setTitle("연락처 검색"); // 제목
+                menu.setView(editText);
+
+
+                // 확인 버튼
+                menu.setPositiveButton("검색", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dialog 제거
+                        //startSearch();
+                        String test = editText.getText().toString();
+                        adapter.clearItems();
+                        contactInfo = dataBase.searchConteactRecord(test);
+                        for (int i = 0; i < contactInfo.toArray().length; i++) {
+                            ContactItem vo = contactInfo.get(i);
+                            adapter.addItem(vo);
+                        }
+                        binding.contactList.setAdapter(adapter);
+                        dialog.dismiss();
+                    }
+                });
+
+                // 취소 버튼
+                menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // dialog 제거
+                        dialog.dismiss();
+                    }
+                });
+                menu.show();
                 break;
             case R.id.action_add:
                 StartAddContactActivity();

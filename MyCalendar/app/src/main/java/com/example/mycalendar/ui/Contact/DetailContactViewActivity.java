@@ -29,7 +29,6 @@ public class DetailContactViewActivity extends AppCompatActivity {
     private ActivityDetailContactViewBinding binding;
 
     DataBase dataBase = new DataBase();
-    private SQLiteDatabase database2; //안쓰이고 있음
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

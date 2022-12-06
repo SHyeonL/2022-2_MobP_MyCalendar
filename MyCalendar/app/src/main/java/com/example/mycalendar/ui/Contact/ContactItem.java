@@ -10,6 +10,7 @@ public class ContactItem {
         this.name = name;
         this.phoneNum = phoneNum;
     }
+
     public String getId() { return id; }
 
     public String getName() {
@@ -20,11 +21,15 @@ public class ContactItem {
         return phoneNum;
     }
 
-    public void SetName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void SetPhoneNum(String phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public void setId(String id){
+        this.id = id;
     }
 }

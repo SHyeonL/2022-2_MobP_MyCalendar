@@ -7,10 +7,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mycalendar.ui.Contact.ContactItem;
 import com.example.mycalendar.ui.Contact.ContactListView;
 import com.example.mycalendar.ui.Contact.DetailContactViewActivity;
 import com.example.mycalendar.ui.home.HomeFragment;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DataBase {
@@ -57,17 +59,33 @@ public class DataBase {
         }
     }
 
-    public void DeleteDiaryRecord() {
+    public ArrayList searchConteactRecord(String name) {
+        String[] arr = {"%" + name + "%"};
+        Cursor res = database.rawQuery("SELECT * FROM " + TABLE_CONTACT_INFO + " WHERE NAME LIKE ?", arr);
+        ArrayList<ContactItem> list = new ArrayList<ContactItem>();
+        res.moveToFirst();
 
+        while (res.isAfterLast() == false) {
+
+            String id = res.getString(0);
+            String name2 = res.getString(1);
+            String number = res.getString(2);
+
+            ContactItem vo = new ContactItem(id, name2, number);
+            list.add(vo);
+            res.moveToNext();
+        }
+        return list;
     }
-/////////////////
+
+    /////////////////
     public boolean deleteContactById(String id) {
-        database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = "+id);
+        database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = " + id);
         return false;
     }
 
     public boolean deleteDiaryById(String id) {
-        database.execSQL("DELETE FROM DIARY_INFO WHERE _id = "+id);
+        database.execSQL("DELETE FROM DIARY_INFO WHERE _id = " + id);
         return false;
     }
 //////////
@@ -77,7 +95,7 @@ public class DataBase {
         Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false) {
+        while (res.isAfterLast() == false) {
             array_list.add(res.getString(res.getColumnIndex("_id")));
             array_list.add(res.getString(res.getColumnIndex("CREATE_DATE")));
             array_list.add(res.getString(res.getColumnIndex("SUBJECT")));
@@ -92,7 +110,7 @@ public class DataBase {
         Cursor res = database.rawQuery("select * from " + TABLE_CONTACT_INFO + " ORDER BY NAME", null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false) {
+        while (res.isAfterLast() == false) {
             array_list.add(res.getString(0));
             array_list.add(res.getString(1));
             array_list.add(res.getString(2));
