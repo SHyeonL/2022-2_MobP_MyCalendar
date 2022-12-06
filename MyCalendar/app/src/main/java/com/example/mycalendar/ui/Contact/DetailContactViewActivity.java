@@ -91,6 +91,7 @@ public class DetailContactViewActivity extends AppCompatActivity {
 
                         // 삭제는 되지만, 페이지 넘김이 안됨
                          dataBase.deltest(intent.getStringExtra("id"));
+                         onBackPressed();
                         //database2.execSQL("DELETE FROM CONTACT_INFO WHERE _id ="+intent.getStringExtra("id"));
 
                     }
