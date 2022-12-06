@@ -1,14 +1,11 @@
 package com.example.mycalendar.ui.home;
 
 import static com.example.mycalendar.DataBase.DATABASE_NAME;
-import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
 import static com.example.mycalendar.DataBase.TABLE_DIARY_INFO;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,13 +17,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mycalendar.DataBase;
-import com.example.mycalendar.MainActivity;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentHomeBinding;
 import com.example.mycalendar.ui.Calendar.AddScheduleActivity;
@@ -34,16 +29,14 @@ import com.example.mycalendar.ui.Calendar.DetailCalendarViewActivity;
 import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.Calendar.toDoListView;
 import com.example.mycalendar.ui.Contact.ContactItem;
-import com.example.mycalendar.ui.Contact.DetailContactViewActivity;
 import com.example.mycalendar.ui.SearchActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     ArrayList arrayList = new ArrayList<String>();
-    ArrayList<ContactItem> contactInfo;
+    ArrayList<toDoItem> diaryInfo;
     private FragmentHomeBinding binding;
     DataBase dataBase = new DataBase();
     public toDoListAdapter adapter;
@@ -84,7 +77,7 @@ public class HomeFragment extends Fragment {
             String date = arrayList.get(i + 1).toString();
             String subject = arrayList.get(i + 2).toString();
             String contents = arrayList.get(i + 3).toString();
-            adapter.addItem(new toDoItem(id, subject, date, contents));
+            adapter.addItem(new toDoItem(id, date, subject, contents));
         }
         binding.todoList.setAdapter(adapter);
     }
@@ -157,18 +150,14 @@ public class HomeFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         // dialog 제거
                         //startSearch();
+                        // dialog 제거
+                        //startSearch();
                         String test = editText.getText().toString();
                         adapter.clearItems();
-                        contactInfo = dataBase.searchConteactRecord(test);
-                        for (int i = 0; i < contactInfo.toArray().length; i += 4) {
-                            Log.d("데이터베이스 값", contactInfo.get(i).toString());
-
-                            ContactItem vo = contactInfo.get(i);
-                            String id = vo.getId();
-                            String name = vo.getName();
-                            String number = vo.getPhoneNum();
-                            String contents = contactInfo.get(i + 3).toString();
-                            //adapter.addItem(new toDoItem(id, date, contents));
+                        diaryInfo = dataBase.searchDiaryRecord(test);
+                        for (int i = 0; i < diaryInfo.toArray().length; i++) {
+                            toDoItem vo = diaryInfo.get(i);
+                            adapter.addItem(vo);
                         }
                         binding.todoList.setAdapter(adapter);
                         dialog.dismiss();

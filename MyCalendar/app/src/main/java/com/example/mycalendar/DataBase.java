@@ -2,17 +2,14 @@ package com.example.mycalendar;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.Contact.ContactItem;
-import com.example.mycalendar.ui.Contact.ContactListView;
-import com.example.mycalendar.ui.Contact.DetailContactViewActivity;
 import com.example.mycalendar.ui.home.HomeFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DataBase {
@@ -59,7 +56,7 @@ public class DataBase {
         }
     }
 
-    public ArrayList searchConteactRecord(String name) {
+    public ArrayList searchContactRecord(String name) {
         String[] arr = {"%" + name + "%"};
         Cursor res = database.rawQuery("SELECT * FROM " + TABLE_CONTACT_INFO + " WHERE NAME LIKE ?", arr);
         ArrayList<ContactItem> list = new ArrayList<ContactItem>();
@@ -72,6 +69,26 @@ public class DataBase {
             String number = res.getString(2);
 
             ContactItem vo = new ContactItem(id, name2, number);
+            list.add(vo);
+            res.moveToNext();
+        }
+        return list;
+    }
+
+    public ArrayList searchDiaryRecord(String subject) {
+        String[] arr = {"%" + subject + "%"};
+        Cursor res = database.rawQuery("SELECT * FROM " + TABLE_DIARY_INFO + " WHERE SUBJECT LIKE ?", arr);
+        ArrayList<toDoItem> list = new ArrayList<toDoItem>();
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            String id = res.getString(0);
+            String date = res.getString(1);
+            String subject2 = res.getString(2);
+            String contents = res.getString(3);
+
+            toDoItem vo = new toDoItem(id, date, subject2, contents);
             list.add(vo);
             res.moveToNext();
         }

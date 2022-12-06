@@ -2,14 +2,14 @@ package com.example.mycalendar.ui.Calendar;
 
 public class toDoItem {
     String id;
-    String title;
     String date;
+    String title;
     String content;
 
-    public toDoItem(String id, String title, String date, String content) {
+    public toDoItem(String id, String date, String title, String content) {
         this.id = id;
-        this.title = title;
         this.date = date;
+        this.title = title;
         this.content = content;
     }
     public String getId() { return id; }
@@ -24,13 +24,15 @@ public class toDoItem {
 
     public String getContent() { return content; }
 
-    public void SetTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public void SetDate(String date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public void SetContent(String content) { this.content = content; }
+    public void setContent(String content) { this.content = content; }
+
+    public void setId() { this.id = id; }
 }

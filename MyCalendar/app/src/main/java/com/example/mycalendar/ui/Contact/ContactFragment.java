@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentContactBinding;
-import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
@@ -145,7 +143,7 @@ public class ContactFragment extends Fragment {
                         //startSearch();
                         String test = editText.getText().toString();
                         adapter.clearItems();
-                        contactInfo = dataBase.searchConteactRecord(test);
+                        contactInfo = dataBase.searchContactRecord(test);
                         for (int i = 0; i < contactInfo.toArray().length; i++) {
                             ContactItem vo = contactInfo.get(i);
                             adapter.addItem(vo);
