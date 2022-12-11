@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
@@ -43,11 +44,21 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
         binding.textDetailContents.setText(content);
         binding.textDetailDate.setText(date);
 
+        binding.editDetailSubject.setText(subject);
+        binding.editDetailContent.setText(content);
+
 
         dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
         dataBase.createContactTable(TABLE_CONTACT_INFO);
-        dataBase.selectData(TABLE_CONTACT_INFO); //테이블설정
-
+        binding.btnEditSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String subject = binding.editDetailSubject.getText().toString();
+                String content = binding.editDetailContent.getText().toString();
+                dataBase.updateDiaryRecord(id, subject, content);
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -60,6 +71,13 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
+                binding.editDetailSubject.setVisibility(View.VISIBLE);
+                binding.editDetailContent.setVisibility(View.VISIBLE);
+                binding.btnEditSubmit.setVisibility(View.VISIBLE);
+                binding.textDetailSubject.setVisibility(View.INVISIBLE);
+                binding.textDetailContents.setVisibility(View.INVISIBLE);
+                binding.textDetailSubject.setVisibility(View.INVISIBLE);
+
                 break;
             case R.id.action_delete:
                 AlertDialog.Builder menu = new AlertDialog.Builder(this);

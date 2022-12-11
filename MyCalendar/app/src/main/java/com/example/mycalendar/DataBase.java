@@ -21,11 +21,11 @@ public class DataBase {
     SQLiteDatabase database;
 
     public void insertContactRecord(String name, String number) {
-        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(name, number) values ('" + name + "', '" + number + "');");
+        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(name, mobile) values ('" + name + "', '" + number + "');");
     }
 
     public void insertDiaryRecord(String name, String date, String title, String content) {
-        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENTS) values ('" + date + "', '" + title + "', '" + content + "');");
+        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENT) values ('" + date + "', '" + title + "', '" + content + "');");
     }
 
     public void openDatabase(Context context, String DATABASE_NAME) {
@@ -75,6 +75,10 @@ public class DataBase {
         return list;
     }
 
+    public void updateDiaryRecord(String id, String subject, String content) {
+        database.execSQL("UPDATE DIARY_INFO SET subject='" + subject + "', content='" + content + "' WHERE _id=" + id);
+    }
+
     public ArrayList searchDiaryRecord(String subject) {
         String[] arr = {"%" + subject + "%"};
         Cursor res = database.rawQuery("SELECT * FROM " + TABLE_DIARY_INFO + " WHERE SUBJECT LIKE ?", arr);
@@ -115,8 +119,8 @@ public class DataBase {
         while (res.isAfterLast() == false) {
             array_list.add(res.getString(res.getColumnIndex("_id")));
             array_list.add(res.getString(res.getColumnIndex("CREATE_DATE")));
-            array_list.add(res.getString(res.getColumnIndex("SUBJECT")));
-            array_list.add(res.getString(res.getColumnIndex("CONTENTS")));
+            array_list.add(res.getString(res.getColumnIndex("subject")));
+            array_list.add(res.getString(res.getColumnIndex("content")));
             res.moveToNext();
         }
         return array_list;
@@ -136,23 +140,23 @@ public class DataBase {
         return array_list;
     }
 
-    public void selectData(String TABLE_CONTACT_INFO) {
-        if (database != null) {
-            String sql = "select name, number from " + TABLE_CONTACT_INFO;
-            Cursor cursor = database.rawQuery(sql, null);
-            for (int i = 0; i < cursor.getCount(); i++) {
-                cursor.moveToNext();//다음 레코드로 넘어간다.
-                String name = cursor.getString(0);
-                String number = cursor.getString(1);
-                Log.d("데이터 name", name);
-                Log.d("데이터 number", number);
-                Log.d("open", "데이터 오픈");
-            }
-            cursor.close();
-        }
-        if (database == null) {
-            Log.d("테스트", "db 비어 있음");
-        }
-    }
+//    public void selectData(String TABLE_CONTACT_INFO) {
+//        if (database != null) {
+//            String sql = "select name, number from " + TABLE_CONTACT_INFO;
+//            Cursor cursor = database.rawQuery(sql, null);
+//            for (int i = 0; i < cursor.getCount(); i++) {
+//                cursor.moveToNext();//다음 레코드로 넘어간다.
+//                String name = cursor.getString(0);
+//                String number = cursor.getString(1);
+//                Log.d("데이터 name", name);
+//                Log.d("데이터 number", number);
+//                Log.d("open", "데이터 오픈");
+//            }
+//            cursor.close();
+//        }
+//        if (database == null) {
+//            Log.d("테스트", "db 비어 있음");
+//        }
+//    }
 
 }

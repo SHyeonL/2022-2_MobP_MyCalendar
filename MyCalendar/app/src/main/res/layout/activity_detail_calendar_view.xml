@@ -35,4 +35,35 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDetailContents" />
+
+    <Button
+        android:id="@+id/btnEditSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수정 완료"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="349dp" />
+
+    <EditText
+        android:id="@+id/editDetailSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editDetailContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDetailSubject" />
 </androidx.constraintlayout.widget.ConstraintLayout>

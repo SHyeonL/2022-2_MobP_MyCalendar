@@ -50,7 +50,6 @@ public class DetailContactViewActivity extends AppCompatActivity {
 
         dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
         dataBase.createContactTable(TABLE_CONTACT_INFO);
-        dataBase.selectData(TABLE_CONTACT_INFO); //테이블설정
 /*
         database2.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
         database2.createContactTable(TABLE_CONTACT_INFO);
