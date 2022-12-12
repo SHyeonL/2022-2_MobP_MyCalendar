@@ -15,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +47,8 @@ public class CalendarFragment extends Fragment {
     DataBase dataBase = new DataBase();
     ArrayList<String> arrayList = new ArrayList<String>();
     ArrayList<toDoItem> diaryInfo;
+    public toDoListAdapter adapter;
+
     final String TAG = "calendar test";
     private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("yyyy년 MM월", Locale.KOREA);
@@ -55,6 +59,7 @@ public class CalendarFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        adapter = new toDoListAdapter();
 
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
         setHasOptionsMenu(true);
@@ -67,62 +72,11 @@ public class CalendarFragment extends Fragment {
 
         binding.compactcalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
 
-        diaryInfo = dataBase.getDiaryInfo();
-        getCalendarInfo();
-
-        binding.buttonRemoveEvents.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.compactcalendarView.removeAllEvents();
-            }
-        });
-
-        binding.buttonGetEvent.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Date dateyymm = binding.compactcalendarView.getFirstDayOfCurrentMonth();
-                String yyymm = dateFormatForMonth2.format(dateyymm);
-
-                String date = yyymm + "-01"; //"2021-11-01";
-
-                Date trans_date = null;
-                try {
-                    trans_date = dateFormatForDisplaying.parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                long time = trans_date.getTime();
-                List<Event> events = binding.compactcalendarView.getEvents(time);
-
-                String info = "";
-                if (events.size() > 0) {
-                    info = events.get(0).getData().toString();
-                }
-
-            }
-        });
-
         binding.compactcalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-
-                List<Event> events = binding.compactcalendarView.getEvents(dateClicked);
-
-                SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String date1 = transFormat.format(dateClicked);
-
-                String event_name = "";
-                String event_date = "";
-
-                if (events.size() > 0) {
-                    event_name = events.get(0).getData().toString();
-                    long time1 = events.get(0).getTimeInMillis();
-                    event_date = transFormat.format(new Date(time1));
-                }
-
-                binding.textViewResult.setText("클릭한 날짜 " + date1 + "정보 :" + event_name + " " + event_date);
-
+                adapter.clearItems();
+                setList(dateClicked);
             }
 
             @Override
@@ -130,7 +84,44 @@ public class CalendarFragment extends Fragment {
                 binding.textViewMonth.setText(dateFormatForMonth.format(firstDayOfNewMonth));
             }
         });
+
+        binding.calendarList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                toDoItem item = (toDoItem) adapter.getItem(position);
+                Intent intent = new Intent(getActivity(), DetailCalendarViewActivity.class);
+                intent.putExtra("id", item.getId());
+                intent.putExtra("subject", item.getTitle());
+                intent.putExtra("content", item.getContent());
+                intent.putExtra("date", item.getDate());
+                startActivity(intent);
+            }
+        });
         return root;
+    }
+
+    public void setList(Date date) {
+        adapter.clearItems();
+        Date dateClicked = date;
+        List<Event> events = binding.compactcalendarView.getEvents(dateClicked);
+
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String date1 = transFormat.format(dateClicked);
+
+        String event_name = "";
+        String event_date = "";
+
+        if (events.size() > 0) {
+            for(int i = 0; i < events.size(); i++) {
+                event_name = events.get(i).getData().toString();
+                //event_content = events.get(i).ge
+                adapter.addItem(new toDoItem("0", date1, event_name, event_name));
+            }
+        }
+        binding.calendarList.setAdapter(adapter);
+
+        binding.textViewResult.setText("클릭한 날짜 " + date1);
+        binding.textCalendarDate.setText(date1);
     }
 
     public void getCalendarInfo() {
@@ -198,8 +189,13 @@ public class CalendarFragment extends Fragment {
         startActivity(intent);
     }
 
-    public void startSearch() {
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("onResume", "Resume");
+        diaryInfo = dataBase.getDiaryInfo();
+        binding.compactcalendarView.removeAllEvents();
+        getCalendarInfo();
     }
 
     @Override
@@ -207,4 +203,42 @@ public class CalendarFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    class toDoListAdapter extends BaseAdapter {
+
+        ArrayList<toDoItem> items = new ArrayList<toDoItem>();
+
+        public void clearItems() { items.clear(); }
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(toDoItem item) {
+            items.add(item);
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
+            toDoListView view = new toDoListView(getActivity().getApplicationContext());
+
+            toDoItem item = items.get(position);
+            view.setTitle(item.getTitle());
+            view.setContent(item.getContent());
+            view.setInvisible();
+            return view;
+        }
+    }
 }
+

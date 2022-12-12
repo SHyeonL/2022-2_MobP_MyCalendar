@@ -129,9 +129,6 @@ public class DataBase {
             toDoItem vo = new toDoItem(id, date, subject, content);
             list.add(vo);
             res.moveToNext();
-//            array_list.add(res.getString(1));
-//            array_list.add(res.getString(2));
-//            array_list.add(res.getString(3));
         }
         return list;
     }
