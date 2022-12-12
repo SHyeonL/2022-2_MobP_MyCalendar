@@ -6,23 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.Contact.DetailContactViewActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="348dp"
+        android:layout_height="332dp"
+        android:layout_marginBottom="332dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/contact_icon" />
+
     <TextView
         android:id="@+id/textDetailName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="384dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="420dp"
+        android:fontFamily="casual"
         android:text="이름"
+        android:textColor="#4A4E69"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textDetailNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="384dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="casual"
         android:text="전화번호"
+        android:textColor="#4A4E69"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDetailName" />
 

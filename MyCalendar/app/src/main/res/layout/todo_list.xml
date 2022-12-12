@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#F2E9E4"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="casual"
             android:text="New Text"
-            android:id="@+id/textName"
+            android:textColor="#4A4E69"
+            android:textColorHighlight="#F2E9E4"
+            android:textColorHint="#F2E9E4"
+            android:textColorLink="#F2E9E4"
             android:textSize="40dp"
-            android:textStyle="bold"
-            android:textColor="#ff5805" />
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,16 +37,24 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="6dp"
                 android:layout_toEndOf="@+id/textContents"
+                android:fontFamily="casual"
                 android:text="New Text"
-                android:textColor="#0223e0"
-                android:textSize="20dp" />
+                android:textColor="#22223B"
+                android:textColorHighlight="#F2E9E4"
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/textContents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="casual"
                 android:text="TextView"
-                android:textSize="20dp" />
+                android:textColor="#4A4E69"
+                android:textColorHighlight="#F2E9E4"
+                android:textColorHint="#F2E9E4"
+                android:textColorLink="#F2E9E4"
+                android:textSize="20dp"
+                android:textStyle="italic" />
 
         </RelativeLayout>
     </LinearLayout>
