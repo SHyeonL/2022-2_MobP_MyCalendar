@@ -25,7 +25,6 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
 
     Intent intent;
     private ActivityDetailCalendarViewBinding binding;
-    //ActionBar ac = getSupportActionBar();
 
     DataBase dataBase = new DataBase();
 
@@ -51,6 +50,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
 
         dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
         dataBase.createContactTable(TABLE_CONTACT_INFO);
+
         binding.btnEditSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +65,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.modify_action_bar, menu);
+        getMenuInflater().inflate(R.menu.edit_action_bar, menu);
         return true;
     }
 
@@ -78,9 +79,8 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
                 binding.textDetailSubject.setVisibility(View.INVISIBLE);
                 binding.textDetailContents.setVisibility(View.INVISIBLE);
                 binding.textDetailSubject.setVisibility(View.INVISIBLE);
-                //ac.menu
-
                 break;
+
             case R.id.action_delete:
                 AlertDialog.Builder menu = new AlertDialog.Builder(this);
                 menu.setTitle("일정 삭제");
