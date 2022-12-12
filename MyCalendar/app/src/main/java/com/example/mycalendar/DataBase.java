@@ -115,7 +115,7 @@ public class DataBase {
     }
 //////////
 
-    public ArrayList getDiaryInfo() {
+    public ArrayList<String> getDiaryInfo() {
         ArrayList<String> array_list = new ArrayList<String>();
         Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
         res.moveToFirst();
