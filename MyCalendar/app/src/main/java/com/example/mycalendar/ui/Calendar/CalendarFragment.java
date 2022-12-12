@@ -67,6 +67,7 @@ public class CalendarFragment extends Fragment {
 
         binding.compactcalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
 
+        diaryInfo = dataBase.getDiaryInfo();
         getCalendarInfo();
 
         binding.buttonRemoveEvents.setOnClickListener(new Button.OnClickListener() {
@@ -133,7 +134,6 @@ public class CalendarFragment extends Fragment {
     }
 
     public void getCalendarInfo() {
-        diaryInfo = dataBase.getDiaryInfo();
         for (int i = 0; i < diaryInfo.toArray().length; i++) {
             toDoItem vo = diaryInfo.get(i);
             Date trans_date1 = null;
@@ -168,15 +168,10 @@ public class CalendarFragment extends Fragment {
                 menu.setPositiveButton("검색", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String test = editText.getText().toString();
-                        diaryInfo = dataBase.searchDiaryRecord(test);
-                        for (int i = 0; i < diaryInfo.toArray().length; i++) {
-                            arrayList.clear();
-                            toDoItem vo = diaryInfo.get(i);
-                            //arrayList.add(vo);
-                            //adapter.addItem(vo);
-                        }
-                        //binding.todoList.setAdapter(adapter);
+                        String subject = editText.getText().toString();
+                        diaryInfo = dataBase.searchDiaryRecord(subject);
+                        binding.compactcalendarView.removeAllEvents();
+                        getCalendarInfo();
                         dialog.dismiss();
                     }
                 });
