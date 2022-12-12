@@ -25,7 +25,7 @@ public class DataBase {
     }
 
     public void insertDiaryRecord(String name, String date, String title, String content) {
-        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENT) values ('" + date + "', '" + title + "', '" + content + "');");
+        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENTS) values ('" + date + "', '" + title + "', '" + content + "');");
     }
 
     public void openDatabase(Context context, String DATABASE_NAME) {
@@ -76,7 +76,7 @@ public class DataBase {
     }
 
     public void updateDiaryRecord(String id, String subject, String content) {
-        database.execSQL("UPDATE DIARY_INFO SET SUBJECT='" + subject + "', CONTENT='" + content + "' WHERE _id=" + id);
+        database.execSQL("UPDATE DIARY_INFO SET SUBJECT ='" + subject + "', CONTENTS='" + content + "' WHERE _id=" + id);
     }
 
     public void updateContactRecord(String id, String name, String number) {

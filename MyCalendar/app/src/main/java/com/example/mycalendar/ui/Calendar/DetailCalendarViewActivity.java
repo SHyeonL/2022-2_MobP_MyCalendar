@@ -57,6 +57,9 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String subject = binding.editDetailSubject.getText().toString();
                 String content = binding.editDetailContent.getText().toString();
+                System.out.println(">>>>>>>>>>>>id : "+id);
+                System.out.println(">>>>>>>>>>>>subject : "+subject);
+                System.out.println(">>>>>>>>>>>>content : "+content);
                 dataBase.updateDiaryRecord(id, subject, content);
                 onBackPressed();
             }
