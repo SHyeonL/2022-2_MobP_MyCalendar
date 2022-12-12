@@ -44,9 +44,8 @@ public class DetailContactViewActivity extends AppCompatActivity {
         binding.textDetailName.setText(name);
         binding.textDetailNumber.setText(number);
 
-
-
-
+        binding.editDetailName.setText(name);
+        binding.editDetailNumber.setText(number);
 
         dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
         dataBase.createContactTable(TABLE_CONTACT_INFO);
@@ -55,6 +54,15 @@ public class DetailContactViewActivity extends AppCompatActivity {
         database2.createContactTable(TABLE_CONTACT_INFO);
         database2.selectData(TABLE_CONTACT_INFO); //테이블설정
 */
+        binding.btnEditConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = binding.editDetailName.getText().toString();
+                String number = binding.editDetailNumber.getText().toString();
+                dataBase.updateContactRecord(id, name, number);
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -67,6 +75,11 @@ public class DetailContactViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
+                binding.textDetailName.setVisibility(View.INVISIBLE);
+                binding.textDetailNumber.setVisibility(View.INVISIBLE);
+                binding.btnEditConfirm.setVisibility(View.VISIBLE);
+                binding.editDetailName.setVisibility(View.VISIBLE);
+                binding.editDetailNumber.setVisibility(View.VISIBLE);
                 break;
             case R.id.action_delete:
                 AlertDialog.Builder menu = new AlertDialog.Builder(this);

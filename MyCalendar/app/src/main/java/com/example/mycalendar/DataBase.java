@@ -21,7 +21,7 @@ public class DataBase {
     SQLiteDatabase database;
 
     public void insertContactRecord(String name, String number) {
-        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(name, mobile) values ('" + name + "', '" + number + "');");
+        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(NAME, NUMBER) values ('" + name + "', '" + number + "');");
     }
 
     public void insertDiaryRecord(String name, String date, String title, String content) {
@@ -38,7 +38,7 @@ public class DataBase {
 
     public void createContactTable(String name) {
         if (database != null) {
-            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, name text, mobile text)";
+            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, NAME text, NUMBER text)";
             database.execSQL(sql);
             Log.d("open", "테이블 오픈");
         } else {
@@ -48,7 +48,7 @@ public class DataBase {
 
     public void createDiaryTable(String name) {
         if (database != null) {
-            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, CREATE_DATE text, subject text, content text)";
+            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, CREATE_DATE text, SUBJECT text, CONTENT text)";
             database.execSQL(sql);
             Log.d("open", "테이블 오픈");
         } else {
@@ -76,7 +76,11 @@ public class DataBase {
     }
 
     public void updateDiaryRecord(String id, String subject, String content) {
-        database.execSQL("UPDATE DIARY_INFO SET subject='" + subject + "', content='" + content + "' WHERE _id=" + id);
+        database.execSQL("UPDATE DIARY_INFO SET SUBJECT='" + subject + "', CONTENT='" + content + "' WHERE _id=" + id);
+    }
+
+    public void updateContactRecord(String id, String name, String number) {
+        database.execSQL("UPDATE CONTACT_INFO SET NAME='" + name + "', NUMBER='" + number + "' WHERE _id=" + id);
     }
 
     public ArrayList searchDiaryRecord(String subject) {
@@ -117,10 +121,10 @@ public class DataBase {
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(res.getColumnIndex("_id")));
-            array_list.add(res.getString(res.getColumnIndex("CREATE_DATE")));
-            array_list.add(res.getString(res.getColumnIndex("subject")));
-            array_list.add(res.getString(res.getColumnIndex("content")));
+            array_list.add(res.getString(0));
+            array_list.add(res.getString(1));
+            array_list.add(res.getString(2));
+            array_list.add(res.getString(3));
             res.moveToNext();
         }
         return array_list;
