@@ -62,8 +62,6 @@ public class CalendarFragment extends Fragment {
 
         dataBase.openDatabase(container.getContext(), DATABASE_NAME);
         dataBase.createDiaryTable(TABLE_DIARY_INFO);
-
-        arrayList = dataBase.getDiaryInfo();
         // 캘린더 코드 시작
         binding.textViewMonth.setText(dateFormatForMonth.format(binding.compactcalendarView.getFirstDayOfCurrentMonth()));
 
@@ -135,21 +133,18 @@ public class CalendarFragment extends Fragment {
     }
 
     public void getCalendarInfo() {
-        for (int i = 0; i < arrayList.toArray().length; i+= 4) {
-            String id = arrayList.get(i);
-            String date = arrayList.get(i + 1);
-            String subject = arrayList.get(i + 2);
-            String contents = arrayList.get(i + 3);
+        diaryInfo = dataBase.getDiaryInfo();
+        for (int i = 0; i < diaryInfo.toArray().length; i++) {
+            toDoItem vo = diaryInfo.get(i);
             Date trans_date1 = null;
             try {
-                trans_date1 = dateFormatForDisplaying.parse(date);
+                trans_date1 = dateFormatForDisplaying.parse(vo.date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
             long time = trans_date1.getTime();
 
-            Event event = new Event(Color.GREEN, time, subject);
+            Event event = new Event(Color.GREEN, time, vo.title);
             binding.compactcalendarView.addEvent(event);
         }
     }
@@ -177,7 +172,8 @@ public class CalendarFragment extends Fragment {
                         diaryInfo = dataBase.searchDiaryRecord(test);
                         for (int i = 0; i < diaryInfo.toArray().length; i++) {
                             arrayList.clear();
-                            //arrayList += diaryInfo.get(i);
+                            toDoItem vo = diaryInfo.get(i);
+                            //arrayList.add(vo);
                             //adapter.addItem(vo);
                         }
                         //binding.todoList.setAdapter(adapter);

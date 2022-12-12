@@ -115,19 +115,25 @@ public class DataBase {
     }
 //////////
 
-    public ArrayList<String> getDiaryInfo() {
-        ArrayList<String> array_list = new ArrayList<String>();
+    public ArrayList<toDoItem> getDiaryInfo() {
+        ArrayList<toDoItem> list = new ArrayList<toDoItem>();
         Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(0));
-            array_list.add(res.getString(1));
-            array_list.add(res.getString(2));
-            array_list.add(res.getString(3));
+            String id = res.getString(0);
+            String date = res.getString(1);
+            String subject = res.getString(2);
+            String content = res.getString(3);
+
+            toDoItem vo = new toDoItem(id, date, subject, content);
+            list.add(vo);
             res.moveToNext();
+//            array_list.add(res.getString(1));
+//            array_list.add(res.getString(2));
+//            array_list.add(res.getString(3));
         }
-        return array_list;
+        return list;
     }
 
     public ArrayList getContactInfo() {
