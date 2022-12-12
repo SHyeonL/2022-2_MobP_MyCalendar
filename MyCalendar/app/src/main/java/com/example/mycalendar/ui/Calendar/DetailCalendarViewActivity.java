@@ -24,6 +24,7 @@ import com.example.mycalendar.databinding.ActivityDetailCalendarViewBinding;
 public class DetailCalendarViewActivity extends AppCompatActivity {
 
     Intent intent;
+    //
     private ActivityDetailCalendarViewBinding binding;
     //ActionBar ac = getSupportActionBar();
 
