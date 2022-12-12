@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_backspace"
+        android:icon="@drawable/image_backspace"
+        android:title="뒤로가기"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_confirm"
+        android:title="완료하기"
+        app:showAsAction="always"
+        android:icon="@drawable/image_confirm"/>
+</menu>

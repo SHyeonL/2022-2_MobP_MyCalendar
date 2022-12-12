@@ -4,6 +4,7 @@ import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,7 +25,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
 
     Intent intent;
     private ActivityDetailCalendarViewBinding binding;
-
+    //ActionBar ac = getSupportActionBar();
 
     DataBase dataBase = new DataBase();
 
@@ -77,6 +78,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
                 binding.textDetailSubject.setVisibility(View.INVISIBLE);
                 binding.textDetailContents.setVisibility(View.INVISIBLE);
                 binding.textDetailSubject.setVisibility(View.INVISIBLE);
+                //ac.menu
 
                 break;
             case R.id.action_delete:
