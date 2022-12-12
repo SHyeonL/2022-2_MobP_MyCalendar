@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/textDetailName"
-        android:layout_width="384dp"
+        android:layout_width="376dp"
         android:layout_height="67dp"
         android:layout_marginTop="420dp"
         android:fontFamily="casual"
@@ -30,15 +30,15 @@
         android:textColorLink="#F2E9E4"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textDetailNumber"
-        android:layout_width="384dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="374dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="casual"
         android:text="전화번호"
         android:textColor="#4A4E69"
@@ -47,44 +47,62 @@
         android:textColorLink="#F2E9E4"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDetailName" />
 
     <EditText
         android:id="@+id/editDetailName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="174dp"
+        android:layout_width="370dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
+        android:fontFamily="casual"
         android:inputType="textPersonName"
         android:text="Name"
+        android:textColor="#4A4E69"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        android:textSize="40dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDetailNumber"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editDetailNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="59dp"
+        android:layout_width="374dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
+        android:fontFamily="casual"
         android:inputType="textPersonName"
         android:text="Name"
+        android:textColor="#4A4E69"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        android:textSize="20dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editDetailName"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/editDetailName" />
 
     <Button
         android:id="@+id/btnEditConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="93dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="#4A4E69"
         android:text="Button"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintHorizontal_bias="0.899"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

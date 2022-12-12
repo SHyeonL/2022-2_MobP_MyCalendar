@@ -11,54 +11,75 @@
     <TextView
         android:id="@+id/textView_month"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:textAlignment="center"
-        android:background="#ffe95451"
-        android:textColor="#fff"
-        android:textSize="30sp"
+        android:layout_height="99dp"
+        android:background="#9A8C98"
         android:gravity="center"
-        android:text="Month" />
+        android:text="Month"
+        android:textAlignment="center"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        android:textSize="30sp" />
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/compactcalendar_view"
         android:layout_width="match_parent"
-        android:paddingRight="10dp"
+        android:layout_height="241dp"
         android:paddingLeft="10dp"
-        android:layout_height="250dp"
-        app:compactCalendarTargetHeight="250dp"
-        app:compactCalendarTextSize="12sp"
+        android:paddingRight="10dp"
         app:compactCalendarBackgroundColor="#ffffff"
+        app:compactCalendarCurrentDayBackgroundColor="#C9ADA7"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#F2E9E4"
+        app:compactCalendarMultiEventIndicatorColor="#9A8C98"
+        app:compactCalendarTargetHeight="250dp"
         app:compactCalendarTextColor="#000"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
-        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
-        app:compactCalendarMultiEventIndicatorColor="#fff"
-        />
+        app:compactCalendarTextSize="12sp" />
 
     <TextView
         android:id="@+id/textView_result"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textAlignment="center"
-        android:background="#ffe95451"
-        android:textColor="#fff"
+        android:layout_height="101dp"
+        android:background="#9A8C98"
         android:gravity="center"
-        android:text="클릭한 날짜 정보" />
+        android:text="클릭한 날짜 정보"
+        android:textAlignment="center"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4" />
+
     <Button
         android:id="@+id/button_add_events"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이벤트 추가" />
+        android:layout_height="52dp"
+        android:backgroundTint="#C9ADA7"
+        android:text="이벤트 추가"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4" />
+
     <Button
         android:id="@+id/button_remove_events"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이벤트 제거" />
+        android:layout_height="58dp"
+        android:backgroundTint="#9A8C98"
+        android:text="이벤트 제거"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4" />
 
     <Button
         android:id="@+id/button_get_event"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이벤트 정보 가져오기" />
+        android:layout_height="54dp"
+        android:backgroundTint="#C9ADA7"
+        android:text="이벤트 정보 가져오기"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4" />
 
 </LinearLayout>
