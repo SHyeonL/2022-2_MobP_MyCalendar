@@ -79,7 +79,6 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             binding.btnEditSubmit.setVisibility(View.VISIBLE);
             binding.textDetailSubject.setVisibility(View.INVISIBLE);
             binding.textDetailContents.setVisibility(View.INVISIBLE);
-            binding.textDetailSubject.setVisibility(View.INVISIBLE);
             id *= -1;
             item.setIcon(R.drawable.image_confirm);
         } else {
@@ -88,7 +87,6 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             binding.btnEditSubmit.setVisibility(View.INVISIBLE);
             binding.textDetailSubject.setVisibility(View.VISIBLE);
             binding.textDetailContents.setVisibility(View.VISIBLE);
-            binding.textDetailSubject.setVisibility(View.VISIBLE);
             id *= -1;
             item.setIcon(R.drawable.image_edit);
         }

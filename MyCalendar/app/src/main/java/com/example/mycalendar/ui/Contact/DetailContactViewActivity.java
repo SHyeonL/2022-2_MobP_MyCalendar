@@ -28,6 +28,8 @@ public class DetailContactViewActivity extends AppCompatActivity {
     Intent intent;
     private ActivityDetailContactViewBinding binding;
 
+    int id = 1;
+
     DataBase dataBase = new DataBase();
 
     @Override
@@ -71,15 +73,31 @@ public class DetailContactViewActivity extends AppCompatActivity {
         return true;
     }
 
+    public void setVisibility(MenuItem item) {
+        if(id > 0) {
+            binding.editDetailName.setVisibility(View.VISIBLE);
+            binding.editDetailNumber.setVisibility(View.VISIBLE);
+            binding.btnEditConfirm.setVisibility(View.VISIBLE);
+            binding.textDetailName.setVisibility(View.INVISIBLE);
+            binding.textDetailNumber.setVisibility(View.INVISIBLE);
+            id *= -1;
+            item.setIcon(R.drawable.image_confirm);
+        } else {
+            binding.editDetailName.setVisibility(View.INVISIBLE);
+            binding.editDetailNumber.setVisibility(View.INVISIBLE);
+            binding.btnEditConfirm.setVisibility(View.INVISIBLE);
+            binding.textDetailName.setVisibility(View.VISIBLE);
+            binding.textDetailNumber.setVisibility(View.VISIBLE);
+            id *= -1;
+            item.setIcon(R.drawable.image_edit);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                binding.textDetailName.setVisibility(View.INVISIBLE);
-                binding.textDetailNumber.setVisibility(View.INVISIBLE);
-                binding.btnEditConfirm.setVisibility(View.VISIBLE);
-                binding.editDetailName.setVisibility(View.VISIBLE);
-                binding.editDetailNumber.setVisibility(View.VISIBLE);
+                setVisibility(item);
                 break;
             case R.id.action_delete:
                 AlertDialog.Builder menu = new AlertDialog.Builder(this);
