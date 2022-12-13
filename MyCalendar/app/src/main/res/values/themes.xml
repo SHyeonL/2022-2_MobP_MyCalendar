@@ -2,15 +2,19 @@
     <!-- Base application theme. -->
     <style name="Theme.MyCalendar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">#9A8C98</item>
+        <item name="colorPrimaryVariant">#C9ADA7</item>
+        <item name="colorOnPrimary">#F2E9E4</item>
+
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">#F2E9E4</item>
+        <item name="colorSecondaryVariant">#9A8C98</item>
+        <item name="colorOnSecondary">#22223B</item>
+
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">#4A4E69</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
