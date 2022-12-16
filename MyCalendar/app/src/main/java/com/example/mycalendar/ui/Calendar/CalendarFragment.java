@@ -17,20 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mycalendar.DataBase;
 import com.example.mycalendar.MainActivity;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentCalendarBinding;
-import com.example.mycalendar.ui.Contact.AddContactActivity;
-import com.example.mycalendar.ui.SearchActivity;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 

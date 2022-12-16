@@ -45,12 +45,6 @@
         android:gravity="center"
         android:text="클릭한 날짜 정보" />
 
-    <Button
-        android:id="@+id/button_get_event"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이벤트 정보 가져오기" />
-
     <TextView
         android:id="@+id/textCalendarDate"
         android:layout_width="match_parent"

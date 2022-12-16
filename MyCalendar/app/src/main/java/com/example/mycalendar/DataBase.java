@@ -167,23 +167,4 @@ public class DataBase {
         return array_list;
     }
 
-//    public void selectData(String TABLE_CONTACT_INFO) {
-//        if (database != null) {
-//            String sql = "select name, number from " + TABLE_CONTACT_INFO;
-//            Cursor cursor = database.rawQuery(sql, null);
-//            for (int i = 0; i < cursor.getCount(); i++) {
-//                cursor.moveToNext();//다음 레코드로 넘어간다.
-//                String name = cursor.getString(0);
-//                String number = cursor.getString(1);
-//                Log.d("데이터 name", name);
-//                Log.d("데이터 number", number);
-//                Log.d("open", "데이터 오픈");
-//            }
-//            cursor.close();
-//        }
-//        if (database == null) {
-//            Log.d("테스트", "db 비어 있음");
-//        }
-//    }
-
 }
