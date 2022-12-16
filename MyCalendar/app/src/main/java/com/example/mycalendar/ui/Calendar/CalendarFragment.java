@@ -47,6 +47,7 @@ public class CalendarFragment extends Fragment {
     DataBase dataBase = new DataBase();
     ArrayList<String> arrayList = new ArrayList<String>();
     ArrayList<toDoItem> diaryInfo;
+    ArrayList<toDoItem> clickedInfo;
     public toDoListAdapter adapter;
 
     final String TAG = "calendar test";
@@ -103,19 +104,16 @@ public class CalendarFragment extends Fragment {
     public void setList(Date date) {
         adapter.clearItems();
         Date dateClicked = date;
+        Log.d("dateClicked", date.toString());
         List<Event> events = binding.compactcalendarView.getEvents(dateClicked);
 
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
         String date1 = transFormat.format(dateClicked);
-
-        String event_name = "";
-        String event_date = "";
+        clickedInfo = dataBase.showClickedDate(date1);
 
         if (events.size() > 0) {
             for(int i = 0; i < events.size(); i++) {
-                event_name = events.get(i).getData().toString();
-                //event_content = events.get(i).ge
-                adapter.addItem(new toDoItem("0", date1, event_name, event_name));
+                adapter.addItem(clickedInfo.get(i));
             }
         }
         binding.calendarList.setAdapter(adapter);

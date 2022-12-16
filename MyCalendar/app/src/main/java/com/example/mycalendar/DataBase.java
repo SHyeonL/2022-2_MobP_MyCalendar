@@ -103,6 +103,26 @@ public class DataBase {
         return list;
     }
 
+    public ArrayList<toDoItem> showClickedDate(String create_date) {
+        String[] arr = {"%" + create_date + "%"};
+        Cursor res = database.rawQuery("SELECT * FROM " + TABLE_DIARY_INFO + " WHERE CREATE_DATE ='" + create_date + "'", null);
+        ArrayList<toDoItem> list = new ArrayList<toDoItem>();
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            String id = res.getString(0);
+            String date = res.getString(1);
+            String subject2 = res.getString(2);
+            String contents = res.getString(3);
+
+            toDoItem vo = new toDoItem(id, date, subject2, contents);
+            list.add(vo);
+            res.moveToNext();
+        }
+        return list;
+    }
+
     /////////////////
     public boolean deleteContactById(String id) {
         database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = " + id);
