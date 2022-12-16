@@ -99,7 +99,6 @@ public class CalendarFragment extends Fragment {
     public void setList(Date date) {
         adapter.clearItems();
         Date dateClicked = date;
-        Log.d("dateClicked", date.toString());
         List<Event> events = binding.compactcalendarView.getEvents(dateClicked);
 
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -107,7 +106,7 @@ public class CalendarFragment extends Fragment {
         clickedInfo = dataBase.showClickedDate(date1);
 
         if (events.size() > 0) {
-            for(int i = 0; i < events.size(); i++) {
+            for(int i = 0; i < clickedInfo.size(); i++) {
                 adapter.addItem(clickedInfo.get(i));
             }
         }
