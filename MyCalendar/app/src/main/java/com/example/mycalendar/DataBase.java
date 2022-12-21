@@ -103,6 +103,26 @@ public class DataBase {
         return list;
     }
 
+    public ArrayList<toDoItem> showClickedDate(String create_date) {
+        String[] arr = {"%" + create_date + "%"};
+        Cursor res = database.rawQuery("SELECT * FROM " + TABLE_DIARY_INFO + " WHERE CREATE_DATE ='" + create_date + "'", null);
+        ArrayList<toDoItem> list = new ArrayList<toDoItem>();
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            String id = res.getString(0);
+            String date = res.getString(1);
+            String subject2 = res.getString(2);
+            String contents = res.getString(3);
+
+            toDoItem vo = new toDoItem(id, date, subject2, contents);
+            list.add(vo);
+            res.moveToNext();
+        }
+        return list;
+    }
+
     /////////////////
     public boolean deleteContactById(String id) {
         database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = " + id);
@@ -115,19 +135,22 @@ public class DataBase {
     }
 //////////
 
-    public ArrayList<String> getDiaryInfo() {
-        ArrayList<String> array_list = new ArrayList<String>();
+    public ArrayList<toDoItem> getDiaryInfo() {
+        ArrayList<toDoItem> list = new ArrayList<toDoItem>();
         Cursor res = database.rawQuery("select * from " + TABLE_DIARY_INFO + " ORDER BY CREATE_DATE", null);
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(0));
-            array_list.add(res.getString(1));
-            array_list.add(res.getString(2));
-            array_list.add(res.getString(3));
+            String id = res.getString(0);
+            String date = res.getString(1);
+            String subject = res.getString(2);
+            String content = res.getString(3);
+
+            toDoItem vo = new toDoItem(id, date, subject, content);
+            list.add(vo);
             res.moveToNext();
         }
-        return array_list;
+        return list;
     }
 
     public ArrayList getContactInfo() {
@@ -143,24 +166,5 @@ public class DataBase {
         }
         return array_list;
     }
-
-//    public void selectData(String TABLE_CONTACT_INFO) {
-//        if (database != null) {
-//            String sql = "select name, number from " + TABLE_CONTACT_INFO;
-//            Cursor cursor = database.rawQuery(sql, null);
-//            for (int i = 0; i < cursor.getCount(); i++) {
-//                cursor.moveToNext();//다음 레코드로 넘어간다.
-//                String name = cursor.getString(0);
-//                String number = cursor.getString(1);
-//                Log.d("데이터 name", name);
-//                Log.d("데이터 number", number);
-//                Log.d("open", "데이터 오픈");
-//            }
-//            cursor.close();
-//        }
-//        if (database == null) {
-//            Log.d("테스트", "db 비어 있음");
-//        }
-//    }
 
 }

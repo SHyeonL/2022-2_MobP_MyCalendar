@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<toDoItem> arrayList = new ArrayList<toDoItem>();
     ArrayList<toDoItem> diaryInfo;
     private FragmentHomeBinding binding;
     DataBase dataBase = new DataBase();
@@ -71,13 +71,9 @@ public class HomeFragment extends Fragment {
         super.onResume();
         adapter.clearItems();
         arrayList = dataBase.getDiaryInfo();
-        for (int i = 0; i < arrayList.toArray().length; i += 4) {
-            Log.d("데이터베이스 값", arrayList.get(i));
-            String id = arrayList.get(i);
-            String date = arrayList.get(i + 1);
-            String subject = arrayList.get(i + 2);
-            String contents = arrayList.get(i + 3);
-            adapter.addItem(new toDoItem(id, date, subject, contents));
+        for (int i = 0; i < arrayList.toArray().length; i ++) {
+            toDoItem vo = arrayList.get(i);
+            adapter.addItem(vo);
         }
         binding.todoList.setAdapter(adapter);
     }

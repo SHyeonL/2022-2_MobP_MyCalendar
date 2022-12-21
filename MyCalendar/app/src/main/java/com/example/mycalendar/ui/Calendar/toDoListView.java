@@ -32,6 +32,10 @@ public class toDoListView extends LinearLayout {
         textContent = (TextView) findViewById(R.id.textContents);
     }
 
+    public void setInvisible() {
+        textDate.setVisibility(INVISIBLE);
+    }
+
     public void setTitle(String title) {
         textTitle.setText(title);
     }
