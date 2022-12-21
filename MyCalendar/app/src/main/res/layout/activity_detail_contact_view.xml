@@ -53,10 +53,10 @@
 
     <EditText
         android:id="@+id/editDetailName"
-        android:layout_width="370dp"
-        android:layout_height="79dp"
+        android:layout_width="365dp"
+        android:layout_height="76dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:fontFamily="casual"
         android:inputType="textPersonName"
@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
         android:backgroundTint="#4A4E69"
-        android:text="Button"
+        android:text="수정"
         android:textColor="#F2E9E4"
         android:textColorHighlight="#F2E9E4"
         android:textColorHint="#F2E9E4"

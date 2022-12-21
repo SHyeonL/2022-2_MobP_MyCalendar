@@ -12,7 +12,7 @@
         android:id="@+id/textView_month"
         android:layout_width="match_parent"
         android:layout_height="99dp"
-        android:background="#9A8C98"
+        android:background="#BFEAF5"
         android:gravity="center"
         android:text="Month"
         android:textAlignment="center"
