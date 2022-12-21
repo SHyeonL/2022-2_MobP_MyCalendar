@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/textView_result"
         android:layout_width="match_parent"
-        android:layout_height="101dp"
+        android:layout_height="55dp"
         android:background="#9A8C98"
         android:gravity="center"
         android:text="클릭한 날짜 정보"
@@ -49,32 +49,10 @@
         android:textColorHint="#F2E9E4"
         android:textColorLink="#F2E9E4" />
 
-    <Button
-        android:id="@+id/button_add_events"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:backgroundTint="#C9ADA7"
-        android:text="이벤트 추가"
-        android:textColor="#F2E9E4"
-        android:textColorHighlight="#F2E9E4"
-        android:textColorHint="#F2E9E4"
-        android:textColorLink="#F2E9E4" />
-
-    <Button
-        android:id="@+id/button_remove_events"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:backgroundTint="#9A8C98"
-        android:text="이벤트 제거"
-        android:textColor="#F2E9E4"
-        android:textColorHighlight="#F2E9E4"
-        android:textColorHint="#F2E9E4"
-        android:textColorLink="#F2E9E4" />
-
     <ListView
         android:id="@+id/calendarList"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="match_parent"
         android:backgroundTint="#C9ADA7"
         android:text="이벤트 정보 가져오기"
         android:textColor="#F2E9E4"
