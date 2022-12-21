@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,19 +19,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 
 import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.ActivityDetailCalendarViewBinding;
 
+import java.util.Calendar;
+
 public class DetailCalendarViewActivity extends AppCompatActivity {
 
     int id = 1;
     Intent intent;
-    //
     private ActivityDetailCalendarViewBinding binding;
 
     DataBase dataBase = new DataBase();
+
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR);
+    int month = calendar.get(Calendar.MONTH);
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +54,50 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
 
         binding.textDetailSubject.setText(subject);
         binding.textDetailContents.setText(content);
-        binding.textDetailDate.setText(date);
-
+        binding.btnEditDate.setText(date);
         binding.editDetailSubject.setText(subject);
         binding.editDetailContent.setText(content);
+        binding.btnEditDate.setClickable(false);
 
-
-        dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
+        dataBase.openDatabase(this, DATABASE_NAME);
         dataBase.createContactTable(TABLE_CONTACT_INFO);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = (month + 1);
+                String tempMonth = "0" + month;
+                String tempDay = "0" + dayOfMonth;
+                if (dayOfMonth < 10) {
+                    if (month < 10) {
+                        binding.btnEditDate.setText(year + "/" + tempMonth + "/" + tempDay);
+                    } else {
+                        binding.btnEditDate.setText(year + "/" + month + "/" + tempDay);
+                    }
+                } else {
+                    if (month < 10) {
+                        binding.btnEditDate.setText(year + "/" + tempMonth + "/" + dayOfMonth);
+                    } else {
+                        binding.btnEditDate.setText(year + "/" + month + "/" + dayOfMonth);
+                    }
+                }
+            }
+        }, year, month, day);
+
+        binding.btnEditDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
 
         binding.btnEditSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String subject = binding.editDetailSubject.getText().toString();
                 String content = binding.editDetailContent.getText().toString();
-                System.out.println(">>>>>>>>>>>>id : "+id);
-                System.out.println(">>>>>>>>>>>>subject : "+subject);
-                System.out.println(">>>>>>>>>>>>content : "+content);
-                dataBase.updateDiaryRecord(id, subject, content);
+                String date = binding.btnEditDate.getText().toString();
+                dataBase.updateDiaryRecord(id, subject, content, date);
                 onBackPressed();
             }
         });
@@ -82,6 +116,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             binding.btnEditSubmit.setVisibility(View.VISIBLE);
             binding.textDetailSubject.setVisibility(View.INVISIBLE);
             binding.textDetailContents.setVisibility(View.INVISIBLE);
+            binding.btnEditDate.setClickable(true);
             id *= -1;
             item.setIcon(R.drawable.image_backspace);
         } else {
@@ -90,6 +125,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             binding.btnEditSubmit.setVisibility(View.INVISIBLE);
             binding.textDetailSubject.setVisibility(View.VISIBLE);
             binding.textDetailContents.setVisibility(View.VISIBLE);
+            binding.btnEditDate.setClickable(false);
             binding.editDetailSubject.setText(binding.textDetailSubject.getText());
             binding.editDetailContent.setText(binding.textDetailContents.getText());
             id *= -1;

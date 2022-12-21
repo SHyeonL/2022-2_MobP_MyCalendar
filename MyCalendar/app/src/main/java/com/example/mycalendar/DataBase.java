@@ -73,8 +73,8 @@ public class DataBase {
         return list;
     }
 
-    public void updateDiaryRecord(String id, String subject, String content) {
-        database.execSQL("UPDATE DIARY_INFO SET SUBJECT ='" + subject + "', CONTENTS='" + content + "' WHERE _id=" + id);
+    public void updateDiaryRecord(String id, String subject, String content, String date) {
+        database.execSQL("UPDATE DIARY_INFO SET SUBJECT ='" + subject + "', CONTENT='" + content + "', CREATE_DATE = '" + date+ "' WHERE _id=" + id);
     }
 
     public void updateContactRecord(String id, String name, String number) {
