@@ -9,8 +9,8 @@
     <ListView
         android:id="@+id/contactList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent"
+        android:listSelector="#F2E9E4"></ListView>
 
 </FrameLayout>
 

@@ -8,51 +8,73 @@
 
     <!--   -->
 
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="140dp"
-        android:layout_height="83dp"
-        android:hint="이름"
-        android:padding="20dp"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="348dp"
+        android:layout_height="332dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066" />
-
-
-
-
+        app:srcCompat="@drawable/contact_icon" />
 
     <EditText
-        android:id="@+id/editNumber"
-        android:layout_width="291dp"
-        android:layout_height="67dp"
-        android:hint="전화번호"
+        android:id="@+id/editName"
+        android:layout_width="373dp"
+        android:layout_height="103dp"
+        android:fontFamily="casual"
+        android:hint="이름"
         android:padding="20dp"
-        android:textColor="#000000"
-        android:textSize="22sp"
+        android:textColor="#4A4E69"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#4A4E69"
+        android:textColorLink="#F2E9E4"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.868"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editName"
-        app:layout_constraintVertical_bias="0.046" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.643" />
 
     <Button
         android:id="@+id/btnContactSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#4A4E69"
+        android:fontFamily="casual"
         android:text="연락처 추가"
+        android:textColor="#F2E9E4"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#F2E9E4"
+        android:textColorLink="#F2E9E4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNumber"
+        app:layout_constraintVertical_bias="0.381" />
+
+    <EditText
+        android:id="@+id/editNumber"
+        android:layout_width="370dp"
+        android:layout_height="75dp"
+        android:fontFamily="casual"
+        android:hint="전화번호"
+        android:padding="20dp"
+        android:textColor="#4A4E69"
+        android:textColorHighlight="#F2E9E4"
+        android:textColorHint="#4A4E69"
+        android:textColorLink="#F2E9E4"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNumber"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintTop_toBottomOf="@+id/editName"
+        app:layout_constraintVertical_bias="0.055" />
 
     <!--   -->
 
