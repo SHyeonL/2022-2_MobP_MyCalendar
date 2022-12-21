@@ -41,6 +41,8 @@ public class HomeFragment extends Fragment {
     DataBase dataBase = new DataBase();
     public toDoListAdapter adapter;
 
+    public int id = 1;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -69,13 +71,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        adapter.clearItems();
-        arrayList = dataBase.getDiaryInfo();
-        for (int i = 0; i < arrayList.toArray().length; i ++) {
-            toDoItem vo = arrayList.get(i);
-            adapter.addItem(vo);
-        }
-        binding.todoList.setAdapter(adapter);
+        setList();
     }
 
     @Override
@@ -121,7 +117,25 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public void setList() {
+        adapter.clearItems();
+        arrayList = dataBase.getDiaryInfo();
+        for (int i = 0; i < arrayList.toArray().length; i ++) {
+            toDoItem vo = arrayList.get(i);
+            adapter.addItem(vo);
+        }
+        binding.todoList.setAdapter(adapter);
+    }
 
+    public void setVisibility(MenuItem item) {
+        if (id > 0) {
+            id *= -1;
+            item.setIcon(R.drawable.image_backspace);
+        } else {
+            id *= -1;
+            item.setIcon(R.drawable.image_search_icon);
+        }
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -133,6 +147,11 @@ public class HomeFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
+                if (id < 0) {
+                    setVisibility(item);
+                    setList();
+                    break;
+                }
                 final EditText editText = new EditText(getContext());
                 AlertDialog.Builder menu = new AlertDialog.Builder(getActivity());
                 menu.setIcon(R.mipmap.ic_launcher);
@@ -144,10 +163,6 @@ public class HomeFragment extends Fragment {
                 menu.setPositiveButton("검색", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // dialog 제거
-                        //startSearch();
-                        // dialog 제거
-                        //startSearch();
                         String test = editText.getText().toString();
                         adapter.clearItems();
                         diaryInfo = dataBase.searchDiaryRecord(test);
@@ -156,15 +171,14 @@ public class HomeFragment extends Fragment {
                             adapter.addItem(vo);
                         }
                         binding.todoList.setAdapter(adapter);
+                        setVisibility(item);
                         dialog.dismiss();
                     }
                 });
 
-                // 취소 버튼
                 menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // dialog 제거
                         dialog.dismiss();
                     }
                 });
