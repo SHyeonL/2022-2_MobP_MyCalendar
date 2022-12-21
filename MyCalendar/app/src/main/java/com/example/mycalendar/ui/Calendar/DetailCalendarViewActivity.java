@@ -90,6 +90,8 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             binding.btnEditSubmit.setVisibility(View.INVISIBLE);
             binding.textDetailSubject.setVisibility(View.VISIBLE);
             binding.textDetailContents.setVisibility(View.VISIBLE);
+            binding.editDetailSubject.setText(binding.textDetailSubject.getText());
+            binding.editDetailContent.setText(binding.textDetailContents.getText());
             id *= -1;
             item.setIcon(R.drawable.image_edit);
         }

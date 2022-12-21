@@ -39,7 +39,6 @@ public class DetailContactViewActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         intent = getIntent();
         String id = intent.getStringExtra("id");
-        Log.d("db_id", id);
         String name = intent.getStringExtra("name");
         String number = intent.getStringExtra("number");
 
@@ -49,13 +48,9 @@ public class DetailContactViewActivity extends AppCompatActivity {
         binding.editDetailName.setText(name);
         binding.editDetailNumber.setText(number);
 
-        dataBase.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
+        dataBase.openDatabase(this, DATABASE_NAME);
         dataBase.createContactTable(TABLE_CONTACT_INFO);
-/*
-        database2.openDatabase(this, DATABASE_NAME);//데이터베이스 이름 설정
-        database2.createContactTable(TABLE_CONTACT_INFO);
-        database2.selectData(TABLE_CONTACT_INFO); //테이블설정
-*/
+
         binding.btnEditConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,13 +76,15 @@ public class DetailContactViewActivity extends AppCompatActivity {
             binding.textDetailName.setVisibility(View.INVISIBLE);
             binding.textDetailNumber.setVisibility(View.INVISIBLE);
             id *= -1;
-            item.setIcon(R.drawable.image_confirm);
+            item.setIcon(R.drawable.image_backspace);
         } else {
             binding.editDetailName.setVisibility(View.INVISIBLE);
             binding.editDetailNumber.setVisibility(View.INVISIBLE);
             binding.btnEditConfirm.setVisibility(View.INVISIBLE);
             binding.textDetailName.setVisibility(View.VISIBLE);
             binding.textDetailNumber.setVisibility(View.VISIBLE);
+            binding.editDetailName.setText(binding.textDetailName.getText());
+            binding.editDetailNumber.setText(binding.textDetailNumber.getText());
             id *= -1;
             item.setIcon(R.drawable.image_edit);
         }
