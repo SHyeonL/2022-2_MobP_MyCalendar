@@ -155,11 +155,9 @@ public class HomeFragment extends Fragment {
                 final EditText editText = new EditText(getContext());
                 AlertDialog.Builder menu = new AlertDialog.Builder(getActivity());
                 menu.setIcon(R.mipmap.ic_launcher);
-                menu.setTitle("일정 검색"); // 제목
+                menu.setTitle("일정 검색");
                 menu.setView(editText);
 
-
-                // 확인 버튼
                 menu.setPositiveButton("검색", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

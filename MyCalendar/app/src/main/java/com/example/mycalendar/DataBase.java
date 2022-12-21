@@ -40,9 +40,8 @@ public class DataBase {
         if (database != null) {
             String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, NAME text, NUMBER text)";
             database.execSQL(sql);
-            Log.d("open", "테이블 오픈");
         } else {
-            Log.d("테스트", "테이블 오픈되지 않음");
+            Log.d("테이블 생성 오류", "연락처 테이블 오픈되지 않음");
         }
     }
 
@@ -50,9 +49,8 @@ public class DataBase {
         if (database != null) {
             String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, CREATE_DATE text, SUBJECT text, CONTENT text)";
             database.execSQL(sql);
-            Log.d("open", "테이블 오픈");
         } else {
-            Log.d("테스트", "테이블 오픈되지 않음");
+            Log.e("테이블 생성 오류", "다이어리 테이블 오픈되지 않음");
         }
     }
 
@@ -123,7 +121,6 @@ public class DataBase {
         return list;
     }
 
-    /////////////////
     public boolean deleteContactById(String id) {
         database.execSQL("DELETE FROM CONTACT_INFO WHERE _id = " + id);
         return false;
@@ -133,7 +130,6 @@ public class DataBase {
         database.execSQL("DELETE FROM DIARY_INFO WHERE _id = " + id);
         return false;
     }
-//////////
 
     public ArrayList<toDoItem> getDiaryInfo() {
         ArrayList<toDoItem> list = new ArrayList<toDoItem>();
@@ -153,18 +149,21 @@ public class DataBase {
         return list;
     }
 
-    public ArrayList getContactInfo() {
-        ArrayList<String> array_list = new ArrayList<String>();
+    public ArrayList<ContactItem> getContactInfo() {
+        ArrayList<ContactItem> list = new ArrayList<ContactItem>();
         Cursor res = database.rawQuery("select * from " + TABLE_CONTACT_INFO + " ORDER BY NAME", null);
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(0));
-            array_list.add(res.getString(1));
-            array_list.add(res.getString(2));
+            String id = res.getString(0);
+            String name = res.getString(1);
+            String number = res.getString(2);
+
+            ContactItem vo = new ContactItem(id, name, number);
+            list.add(vo);
             res.moveToNext();
         }
-        return array_list;
+        return list;
     }
 
 }

@@ -24,10 +24,10 @@ import androidx.fragment.app.Fragment;
 import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentContactBinding;
+import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
-
 
 public class ContactFragment extends Fragment {
 
@@ -35,8 +35,10 @@ public class ContactFragment extends Fragment {
     ContactListAdapter adapter;
     ArrayList<ContactItem> contactInfo;
 
-    ArrayList arrayList = new ArrayList<String>();
+    ArrayList<ContactItem> arrayList = new ArrayList<ContactItem>();
     DataBase dataBase = new DataBase();
+
+    public int id = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,14 +67,15 @@ public class ContactFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        setList();
+    }
+
+    public void setList() {
         adapter.clearItems();
         arrayList = dataBase.getContactInfo();
-        for (int i = 0; i < arrayList.toArray().length; i += 3) {
-            Log.d("데이터베이스 값", arrayList.get(i).toString());
-            String id = arrayList.get(i).toString();
-            String name = arrayList.get(i + 1).toString();
-            String number = arrayList.get(i + 2).toString();
-            adapter.addItem(new ContactItem(id, name, number));
+        for (int i = 0; i < arrayList.toArray().length; i ++) {
+            ContactItem vo = arrayList.get(i);
+            adapter.addItem(vo);
         }
         binding.contactList.setAdapter(adapter);
     }
@@ -128,19 +131,21 @@ public class ContactFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
+                if (id < 0) {
+                    item.setIcon(R.drawable.image_search_icon);
+                    setList();
+                    id *= -1;
+                    break;
+                }
                 final EditText editText = new EditText(getContext());
                 AlertDialog.Builder menu = new AlertDialog.Builder(getActivity());
                 menu.setIcon(R.mipmap.ic_launcher);
-                menu.setTitle("연락처 검색"); // 제목
+                menu.setTitle("연락처 검색");
                 menu.setView(editText);
 
-
-                // 확인 버튼
                 menu.setPositiveButton("검색", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // dialog 제거
-                        //startSearch();
                         String test = editText.getText().toString();
                         adapter.clearItems();
                         contactInfo = dataBase.searchContactRecord(test);
@@ -149,15 +154,15 @@ public class ContactFragment extends Fragment {
                             adapter.addItem(vo);
                         }
                         binding.contactList.setAdapter(adapter);
+                        item.setIcon(R.drawable.image_backspace);
+                        id *= -1;
                         dialog.dismiss();
                     }
                 });
 
-                // 취소 버튼
                 menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // dialog 제거
                         dialog.dismiss();
                     }
                 });
