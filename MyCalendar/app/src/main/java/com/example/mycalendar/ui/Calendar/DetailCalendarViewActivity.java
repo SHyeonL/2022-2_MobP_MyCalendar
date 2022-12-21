@@ -3,11 +3,13 @@ package com.example.mycalendar.ui.Calendar;
 import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +25,9 @@ import com.example.mycalendar.databinding.ActivityDetailCalendarViewBinding;
 
 public class DetailCalendarViewActivity extends AppCompatActivity {
 
+    int id = 1;
     Intent intent;
+    //
     private ActivityDetailCalendarViewBinding binding;
 
     DataBase dataBase = new DataBase();
@@ -56,6 +60,9 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String subject = binding.editDetailSubject.getText().toString();
                 String content = binding.editDetailContent.getText().toString();
+                System.out.println(">>>>>>>>>>>>id : "+id);
+                System.out.println(">>>>>>>>>>>>subject : "+subject);
+                System.out.println(">>>>>>>>>>>>content : "+content);
                 dataBase.updateDiaryRecord(id, subject, content);
                 onBackPressed();
             }
@@ -65,20 +72,33 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.modify_action_bar, menu);
-        getMenuInflater().inflate(R.menu.edit_action_bar, menu);
         return true;
     }
 
+    public void setVisibility(MenuItem item) {
+        if(id > 0) {
+            binding.editDetailSubject.setVisibility(View.VISIBLE);
+            binding.editDetailContent.setVisibility(View.VISIBLE);
+            binding.btnEditSubmit.setVisibility(View.VISIBLE);
+            binding.textDetailSubject.setVisibility(View.INVISIBLE);
+            binding.textDetailContents.setVisibility(View.INVISIBLE);
+            id *= -1;
+            item.setIcon(R.drawable.image_backspace);
+        } else {
+            binding.editDetailSubject.setVisibility(View.INVISIBLE);
+            binding.editDetailContent.setVisibility(View.INVISIBLE);
+            binding.btnEditSubmit.setVisibility(View.INVISIBLE);
+            binding.textDetailSubject.setVisibility(View.VISIBLE);
+            binding.textDetailContents.setVisibility(View.VISIBLE);
+            id *= -1;
+            item.setIcon(R.drawable.image_edit);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                binding.editDetailSubject.setVisibility(View.VISIBLE);
-                binding.editDetailContent.setVisibility(View.VISIBLE);
-                binding.btnEditSubmit.setVisibility(View.VISIBLE);
-                binding.textDetailSubject.setVisibility(View.INVISIBLE);
-                binding.textDetailContents.setVisibility(View.INVISIBLE);
-                binding.textDetailSubject.setVisibility(View.INVISIBLE);
+                setVisibility(item);
                 break;
 
             case R.id.action_delete:

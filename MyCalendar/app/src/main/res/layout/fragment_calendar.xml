@@ -71,8 +71,8 @@
         android:textColorHint="#F2E9E4"
         android:textColorLink="#F2E9E4" />
 
-    <Button
-        android:id="@+id/button_get_event"
+    <ListView
+        android:id="@+id/calendarList"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:backgroundTint="#C9ADA7"
