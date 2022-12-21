@@ -20,6 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 
 import com.example.mycalendar.DataBase;
@@ -44,6 +45,9 @@ public class CalendarFragment extends Fragment {
     ArrayList<toDoItem> diaryInfo;
     ArrayList<toDoItem> clickedInfo;
     public toDoListAdapter adapter;
+
+    public int id = 1;
+    public Date clickedDate;
 
     final String TAG = "calendar test";
     private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
@@ -98,15 +102,15 @@ public class CalendarFragment extends Fragment {
 
     public void setList(Date date) {
         adapter.clearItems();
-        Date dateClicked = date;
-        List<Event> events = binding.compactcalendarView.getEvents(dateClicked);
+        clickedDate = date;
+        List<Event> events = binding.compactcalendarView.getEvents(clickedDate);
 
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String date1 = transFormat.format(dateClicked);
+        String date1 = transFormat.format(clickedDate);
         clickedInfo = dataBase.showClickedDate(date1);
 
         if (events.size() > 0) {
-            for(int i = 0; i < clickedInfo.size(); i++) {
+            for (int i = 0; i < clickedInfo.size(); i++) {
                 adapter.addItem(clickedInfo.get(i));
             }
         }
@@ -138,10 +142,26 @@ public class CalendarFragment extends Fragment {
         inflater.inflate(R.menu.common_action_bar, menu);
     }
 
+    public void setVisibility(MenuItem item) {
+        if (id > 0) {
+            id *= -1;
+            item.setIcon(R.drawable.image_backspace);
+        } else {
+            id *= -1;
+            item.setIcon(R.drawable.image_search_icon);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
+                if (id < 0) {
+                    setVisibility(item);
+                    diaryInfo = dataBase.getDiaryInfo();
+                    getCalendarInfo();
+                    break;
+                }
                 final EditText editText = new EditText(getContext());
                 AlertDialog.Builder menu = new AlertDialog.Builder(getActivity());
                 menu.setIcon(R.mipmap.ic_launcher);
@@ -155,6 +175,7 @@ public class CalendarFragment extends Fragment {
                         diaryInfo = dataBase.searchDiaryRecord(subject);
                         binding.compactcalendarView.removeAllEvents();
                         getCalendarInfo();
+                        setVisibility(item);
                         dialog.dismiss();
                     }
                 });
@@ -188,6 +209,8 @@ public class CalendarFragment extends Fragment {
         diaryInfo = dataBase.getDiaryInfo();
         binding.compactcalendarView.removeAllEvents();
         getCalendarInfo();
+        if (clickedDate != null)
+            setList(clickedDate);
     }
 
     @Override
@@ -200,7 +223,9 @@ public class CalendarFragment extends Fragment {
 
         ArrayList<toDoItem> items = new ArrayList<toDoItem>();
 
-        public void clearItems() { items.clear(); }
+        public void clearItems() {
+            items.clear();
+        }
 
         @Override
         public int getCount() {

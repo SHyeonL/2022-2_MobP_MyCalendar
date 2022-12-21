@@ -80,7 +80,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             binding.textDetailSubject.setVisibility(View.INVISIBLE);
             binding.textDetailContents.setVisibility(View.INVISIBLE);
             id *= -1;
-            item.setIcon(R.drawable.image_confirm);
+            item.setIcon(R.drawable.image_backspace);
         } else {
             binding.editDetailSubject.setVisibility(View.INVISIBLE);
             binding.editDetailContent.setVisibility(View.INVISIBLE);
