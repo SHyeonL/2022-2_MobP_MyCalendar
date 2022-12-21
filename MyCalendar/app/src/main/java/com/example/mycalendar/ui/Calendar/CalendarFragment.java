@@ -117,7 +117,6 @@ public class CalendarFragment extends Fragment {
         binding.calendarList.setAdapter(adapter);
 
         binding.textViewResult.setText("클릭한 날짜 " + date1);
-        //binding.textCalendarDate.setText(date1);
     }
 
     public void getCalendarInfo() {
