@@ -25,7 +25,7 @@ public class DataBase {
     }
 
     public void insertDiaryRecord(String name, String date, String title, String content) {
-        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENTS) values ('" + date + "', '" + title + "', '" + content + "');");
+        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENT) values ('" + date + "', '" + title + "', '" + content + "');");
     }
 
     public void openDatabase(Context context, String DATABASE_NAME) {
