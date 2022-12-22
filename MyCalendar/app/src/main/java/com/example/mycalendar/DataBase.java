@@ -13,24 +13,24 @@ import com.example.mycalendar.ui.home.HomeFragment;
 import java.util.ArrayList;
 
 public class DataBase {
-    public static String DATABASE_NAME = "diary.db";
+    public static String DATABASE_NAME = "mycalendar.db";
     public static String TABLE_DIARY_INFO = "DIARY_INFO";
     public static String TABLE_CONTACT_INFO = "CONTACT_INFO";
 
-    HomeFragment homeFragment;
     SQLiteDatabase database;
 
     public void insertContactRecord(String name, String number) {
-        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(NAME, NUMBER) values ('" + name + "', '" + number + "');");
+        database.execSQL("insert into " + TABLE_CONTACT_INFO + "(NAME, NUMBER) values" +
+                "('" + name + "', '" + number + "');");
     }
 
     public void insertDiaryRecord(String name, String date, String title, String content) {
-        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENT) values ('" + date + "', '" + title + "', '" + content + "');");
+        database.execSQL("insert into " + TABLE_DIARY_INFO + "(CREATE_DATE, SUBJECT, CONTENT) values " +
+                "('" + date + "', '" + title + "', '" + content + "');");
     }
 
     public void openDatabase(Context context, String DATABASE_NAME) {
-        database = context.openOrCreateDatabase(DATABASE_NAME, context.MODE_PRIVATE, null); //보안때문에 요즘은 대부분 PRIVATE 사용,
-        // SQLiteDatabase 객체가 반환됨
+        database = context.openOrCreateDatabase(DATABASE_NAME, context.MODE_PRIVATE, null);
         if (database != null) {
             Log.d("open", "데이터베이스 오픈");
         }
@@ -38,7 +38,8 @@ public class DataBase {
 
     public void createContactTable(String name) {
         if (database != null) {
-            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, NAME text, NUMBER text)";
+            String sql = "create table if not exists " + name + "" +
+                    "(_id integer PRIMARY KEY autoincrement, NAME text, NUMBER text)";
             database.execSQL(sql);
         } else {
             Log.d("테이블 생성 오류", "연락처 테이블 오픈되지 않음");
@@ -47,7 +48,8 @@ public class DataBase {
 
     public void createDiaryTable(String name) {
         if (database != null) {
-            String sql = "create table if not exists " + name + "(_id integer PRIMARY KEY autoincrement, CREATE_DATE text, SUBJECT text, CONTENT text)";
+            String sql = "create table if not exists " + name +
+                    "(_id integer PRIMARY KEY autoincrement, CREATE_DATE text, SUBJECT text, CONTENT text)";
             database.execSQL(sql);
         } else {
             Log.e("테이블 생성 오류", "다이어리 테이블 오픈되지 않음");
