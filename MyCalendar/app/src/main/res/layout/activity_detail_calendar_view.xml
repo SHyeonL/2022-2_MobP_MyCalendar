@@ -23,7 +23,7 @@
         android:layout_width="369dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="casual"
         android:text="TextView"
         android:textColor="#4A4E69"
@@ -32,14 +32,14 @@
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/textDetailContents"
         android:layout_width="366dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="casual"
         android:text="TextView"
         android:textColor="#4A4E69"
@@ -90,7 +90,7 @@
         android:layout_width="364dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:fontFamily="casual"
         android:inputType="textMultiLine"
@@ -102,14 +102,14 @@
         android:textSize="40dp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
         android:id="@+id/editDetailContent"
         android:layout_width="362dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:fontFamily="casual"
         android:inputType="textMultiLine"
