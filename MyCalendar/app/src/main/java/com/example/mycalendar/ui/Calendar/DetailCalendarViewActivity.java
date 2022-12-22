@@ -110,7 +110,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
     }
 
     public void setVisibility(MenuItem item) {
-        if(id > 0) {
+        if (id > 0) {
             binding.editDetailSubject.setVisibility(View.VISIBLE);
             binding.editDetailContent.setVisibility(View.VISIBLE);
             binding.btnEditSubmit.setVisibility(View.VISIBLE);
@@ -132,6 +132,7 @@ public class DetailCalendarViewActivity extends AppCompatActivity {
             item.setIcon(R.drawable.image_edit);
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

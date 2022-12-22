@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,8 +23,6 @@ import androidx.fragment.app.Fragment;
 import com.example.mycalendar.DataBase;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.FragmentContactBinding;
-import com.example.mycalendar.ui.Calendar.toDoItem;
-import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -73,7 +70,7 @@ public class ContactFragment extends Fragment {
     public void setList() {
         adapter.clearItems();
         arrayList = dataBase.getContactInfo();
-        for (int i = 0; i < arrayList.toArray().length; i ++) {
+        for (int i = 0; i < arrayList.toArray().length; i++) {
             ContactItem vo = arrayList.get(i);
             adapter.addItem(vo);
         }
@@ -98,7 +95,9 @@ public class ContactFragment extends Fragment {
             items.add(item);
         }
 
-        public void clearItems() { items.clear(); }
+        public void clearItems() {
+            items.clear();
+        }
 
         @Override
         public Object getItem(int position) {
@@ -177,11 +176,6 @@ public class ContactFragment extends Fragment {
 
     public void StartAddContactActivity() {
         Intent intent = new Intent(getActivity(), AddContactActivity.class);
-        startActivity(intent);
-    }
-
-    public void StartSearchActivity() {
-        Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent);
     }
 

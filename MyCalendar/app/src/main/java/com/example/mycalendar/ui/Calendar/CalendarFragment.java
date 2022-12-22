@@ -20,7 +20,6 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 
 import com.example.mycalendar.DataBase;
@@ -41,7 +40,6 @@ import java.util.Locale;
 public class CalendarFragment extends Fragment {
 
     DataBase dataBase = new DataBase();
-    ArrayList<String> arrayList = new ArrayList<String>();
     ArrayList<toDoItem> diaryInfo;
     ArrayList<toDoItem> clickedInfo;
     public toDoListAdapter adapter;
@@ -49,10 +47,8 @@ public class CalendarFragment extends Fragment {
     public int id = 1;
     public Date clickedDate;
 
-    final String TAG = "calendar test";
     private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("yyyy년 MM월", Locale.KOREA);
-    private SimpleDateFormat dateFormatForMonth2 = new SimpleDateFormat("yyyy/MM", Locale.KOREA);
 
     private FragmentCalendarBinding binding;
     MainActivity mainActivity = new MainActivity();
@@ -67,7 +63,7 @@ public class CalendarFragment extends Fragment {
 
         dataBase.openDatabase(container.getContext(), DATABASE_NAME);
         dataBase.createDiaryTable(TABLE_DIARY_INFO);
-        // 캘린더 코드 시작
+
         binding.textViewMonth.setText(dateFormatForMonth.format(binding.compactcalendarView.getFirstDayOfCurrentMonth()));
 
         binding.compactcalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
@@ -179,11 +175,9 @@ public class CalendarFragment extends Fragment {
                     }
                 });
 
-                // 취소 버튼
                 menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // dialog 제거
                         dialog.dismiss();
                     }
                 });

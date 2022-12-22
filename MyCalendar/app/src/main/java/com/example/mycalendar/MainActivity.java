@@ -1,6 +1,5 @@
 package com.example.mycalendar;
 
-import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 import com.example.mycalendar.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -9,7 +8,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import android.util.Log;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,6 +1,4 @@
 package com.example.mycalendar.ui.Calendar;
-//
-//
 
 import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_DIARY_INFO;

@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,8 +27,6 @@ import com.example.mycalendar.ui.Calendar.AddScheduleActivity;
 import com.example.mycalendar.ui.Calendar.DetailCalendarViewActivity;
 import com.example.mycalendar.ui.Calendar.toDoItem;
 import com.example.mycalendar.ui.Calendar.toDoListView;
-import com.example.mycalendar.ui.Contact.ContactItem;
-import com.example.mycalendar.ui.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -84,7 +81,9 @@ public class HomeFragment extends Fragment {
 
         ArrayList<toDoItem> items = new ArrayList<toDoItem>();
 
-        public void clearItems() { items.clear(); }
+        public void clearItems() {
+            items.clear();
+        }
 
         @Override
         public int getCount() {
@@ -120,7 +119,7 @@ public class HomeFragment extends Fragment {
     public void setList() {
         adapter.clearItems();
         arrayList = dataBase.getDiaryInfo();
-        for (int i = 0; i < arrayList.toArray().length; i ++) {
+        for (int i = 0; i < arrayList.toArray().length; i++) {
             toDoItem vo = arrayList.get(i);
             adapter.addItem(vo);
         }
@@ -191,11 +190,6 @@ public class HomeFragment extends Fragment {
 
     public void StartAddScheduleActivity() {
         Intent intent = new Intent(getActivity(), AddScheduleActivity.class);
-        startActivity(intent);
-    }
-
-    public void StartSearchActivity() {
-        Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent);
     }
 }

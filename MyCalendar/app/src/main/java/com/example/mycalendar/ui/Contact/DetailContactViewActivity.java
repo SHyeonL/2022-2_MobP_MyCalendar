@@ -1,6 +1,5 @@
 package com.example.mycalendar.ui.Contact;
 
-import static android.icu.lang.UProperty.NAME;
 import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
 
@@ -10,16 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.mycalendar.DataBase;
-import com.example.mycalendar.MainActivity;
 import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.ActivityDetailContactViewBinding;
 
@@ -69,7 +64,7 @@ public class DetailContactViewActivity extends AppCompatActivity {
     }
 
     public void setVisibility(MenuItem item) {
-        if(id > 0) {
+        if (id > 0) {
             binding.editDetailName.setVisibility(View.VISIBLE);
             binding.editDetailNumber.setVisibility(View.VISIBLE);
             binding.btnEditConfirm.setVisibility(View.VISIBLE);
@@ -104,8 +99,8 @@ public class DetailContactViewActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                         dataBase.deleteContactById(intent.getStringExtra("id"));
-                         onBackPressed();
+                        dataBase.deleteContactById(intent.getStringExtra("id"));
+                        onBackPressed();
                     }
                 });
                 menu.setNegativeButton("취소", new DialogInterface.OnClickListener() {

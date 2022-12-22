@@ -11,7 +11,9 @@ public class ContactItem {
         this.phoneNum = phoneNum;
     }
 
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -29,7 +31,7 @@ public class ContactItem {
         this.phoneNum = phoneNum;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 }

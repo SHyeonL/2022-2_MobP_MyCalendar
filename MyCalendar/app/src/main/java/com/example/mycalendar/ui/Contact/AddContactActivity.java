@@ -4,14 +4,11 @@ import static com.example.mycalendar.DataBase.DATABASE_NAME;
 import static com.example.mycalendar.DataBase.TABLE_CONTACT_INFO;
 
 import androidx.appcompat.app.AppCompatActivity;
-//
-//
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.mycalendar.DataBase;
-import com.example.mycalendar.R;
 import com.example.mycalendar.databinding.ActivityAddContactBinding;
 
 public class AddContactActivity extends AppCompatActivity {

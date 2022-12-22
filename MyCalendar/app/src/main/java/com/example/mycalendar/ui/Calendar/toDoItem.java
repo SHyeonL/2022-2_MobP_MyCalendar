@@ -12,7 +12,10 @@ public class toDoItem {
         this.title = title;
         this.content = content;
     }
-    public String getId() { return id; }
+
+    public String getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -22,7 +25,9 @@ public class toDoItem {
         return date;
     }
 
-    public String getContent() { return content; }
+    public String getContent() {
+        return content;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -32,7 +37,11 @@ public class toDoItem {
         this.date = date;
     }
 
-    public void setContent(String content) { this.content = content; }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-    public void setId() { this.id = id; }
+    public void setId() {
+        this.id = id;
+    }
 }
